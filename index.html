@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MasterFix Pro</title>
+    <title data-i18n="siteTitle">MasterFix Pro</title>
     <meta
       name="description"
       content="Professional home services: electrical work, window installation, repair, painting, and more."
@@ -48,6 +48,7 @@
         align-items: center;
         justify-content: space-between;
         min-height: 72px;
+        gap: 18px;
       }
       .brand {
         display: flex;
@@ -74,6 +75,29 @@
         font-size: 0.95rem;
       }
       nav a:hover { color: var(--brand); }
+      .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #f1f5f9;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px;
+      }
+      .lang-btn {
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .lang-btn.active {
+        background: white;
+        color: var(--brand);
+        box-shadow: 0 2px 10px rgba(37,99,235,0.08);
+      }
       .cta {
         display: inline-block;
         padding: 14px 24px;
@@ -322,15 +346,24 @@
           <div class="brand-mark">🔧</div>
           <span>Master<span style="color: var(--brand);">Fix</span> Pro</span>
         </div>
+
         <nav>
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
+          <a href="#home" data-i18n="navHome">Home</a>
+          <a href="#services" data-i18n="navServices">Services</a>
+          <a href="#about" data-i18n="navAbout">About</a>
+          <a href="#pricing" data-i18n="navPricing">Pricing</a>
+          <a href="#faq" data-i18n="navFaq">FAQ</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
-        <a class="cta" href="#contact">Book a call</a>
+
+        <div class="lang-switch" aria-label="Language selector">
+          <button class="lang-btn active" data-lang="uk" type="button">UA</button>
+          <button class="lang-btn" data-lang="ru" type="button">RU</button>
+          <button class="lang-btn" data-lang="de" type="button">DE</button>
+          <button class="lang-btn" data-lang="es" type="button">ES</button>
+        </div>
+
+        <a class="cta" href="#contact" data-i18n="ctaBook">Book a call</a>
       </div>
     </header>
 
@@ -338,24 +371,24 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="eyebrow">High quality work & guarantee</div>
-            <h1>Professional repair and installation for your home.</h1>
-            <p class="lead">
+            <div class="eyebrow" data-i18n="eyebrow">High quality work & guarantee</div>
+            <h1 data-i18n="heroTitle">Professional repair and installation for your home.</h1>
+            <p class="lead" data-i18n="heroText">
               Comprehensive electrical work, window installation, repair, painting,
               and restoration services by experienced specialists.
             </p>
             <div class="hero-actions">
-              <a class="cta" href="#pricing">Calculate cost</a>
-              <a class="btn-light" href="#services">Our services</a>
+              <a class="cta" href="#pricing" data-i18n="heroCTA1">Calculate cost</a>
+              <a class="btn-light" href="#services" data-i18n="heroCTA2">Our services</a>
             </div>
           </div>
 
           <div class="card-form">
-            <h3>Quick request</h3>
+            <h3 data-i18n="quickRequest">Quick request</h3>
             <form>
-              <input class="field" type="text" placeholder="Your name" />
-              <input class="field" type="tel" placeholder="Phone number" />
-              <button class="cta" type="submit" style="width:100%;">Request a call</button>
+              <input class="field" type="text" data-i18n-placeholder="namePlaceholder" placeholder="Your name" />
+              <input class="field" type="tel" data-i18n-placeholder="phonePlaceholder" placeholder="Phone number" />
+              <button class="cta" type="submit" style="width:100%;" data-i18n="requestCall">Request a call</button>
             </form>
           </div>
         </div>
@@ -364,45 +397,45 @@
       <section id="services" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Our work</span>
-            <h2>Key services</h2>
-            <p>We deliver reliable home improvement services with transparent pricing and quality assurance.</p>
+            <span data-i18n="servicesTag">Our work</span>
+            <h2 data-i18n="servicesTitle">Key services</h2>
+            <p data-i18n="servicesText">We deliver reliable home improvement services with transparent pricing and quality assurance.</p>
           </div>
           <div class="grid-4">
             <article class="feature">
               <div class="icon">⚡</div>
-              <h3>Electrical work</h3>
-              <p>Wiring, sockets, switches, automation and troubleshooting.</p>
+              <h3 data-i18n="service1Title">Electrical work</h3>
+              <p data-i18n="service1Text">Wiring, sockets, switches, automation and troubleshooting.</p>
             </article>
             <article class="feature">
               <div class="icon">🪟</div>
-              <h3>Window installation</h3>
-              <p>Professional mounting of plastic, aluminum and wooden windows.</p>
+              <h3 data-i18n="service2Title">Window installation</h3>
+              <p data-i18n="service2Text">Professional mounting of plastic, aluminum and wooden windows.</p>
             </article>
             <article class="feature">
               <div class="icon">🛠️</div>
-              <h3>Window repair</h3>
-              <p>Repair of frames, wood elements, seals and hardware.</p>
+              <h3 data-i18n="service3Title">Window repair</h3>
+              <p data-i18n="service3Text">Repair of frames, wood elements, seals and hardware.</p>
             </article>
             <article class="feature">
               <div class="icon">🎨</div>
-              <h3>Window painting</h3>
-              <p>Modern renewal of window frames in any desired color.</p>
+              <h3 data-i18n="service4Title">Window painting</h3>
+              <p data-i18n="service4Text">Modern renewal of window frames in any desired color.</p>
             </article>
           </div>
 
           <div class="stats">
             <div class="stat">
               <strong>10+</strong>
-              <span>Years of experience</span>
+              <span data-i18n="stat1">Years of experience</span>
             </div>
             <div class="stat">
               <strong>3500+</strong>
-              <span>Orders completed</span>
+              <span data-i18n="stat2">Orders completed</span>
             </div>
             <div class="stat">
               <strong>100%</strong>
-              <span>Quality guarantee</span>
+              <span data-i18n="stat3">Quality guarantee</span>
             </div>
           </div>
         </div>
@@ -411,9 +444,9 @@
       <section id="about" class="section" style="background: white;">
         <div class="container">
           <div class="section-header">
-            <span>About us</span>
-            <h2>Team of professionals</h2>
-            <p>Our craftsmen work with proven methods, quality materials and long-term reliability in mind.</p>
+            <span data-i18n="aboutTag">About us</span>
+            <h2 data-i18n="aboutTitle">Team of professionals</h2>
+            <p data-i18n="aboutText">Our craftsmen work with proven methods, quality materials and long-term reliability in mind.</p>
           </div>
         </div>
       </section>
@@ -421,49 +454,49 @@
       <section id="pricing" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Pricing</span>
-            <h2>Transparent prices</h2>
-            <p>Estimated service rates for basic home projects.</p>
+            <span data-i18n="pricingTag">Pricing</span>
+            <h2 data-i18n="pricingTitle">Transparent prices</h2>
+            <p data-i18n="pricingText">Estimated service rates for basic home projects.</p>
           </div>
           <div class="pricing">
             <article class="price-card">
               <div class="icon">⚡</div>
-              <h3>Electrical</h3>
-              <div class="price">€25 <small>/ service</small></div>
+              <h3 data-i18n="price1Title">Electrical</h3>
+              <div class="price">€25 <small data-i18n="priceUnitService">/ service</small></div>
               <ul>
-                <li>Socket installation</li>
-                <li>Breaker mounting</li>
-                <li>Lighting connection</li>
+                <li data-i18n="price1L1">Socket installation</li>
+                <li data-i18n="price1L2">Breaker mounting</li>
+                <li data-i18n="price1L3">Lighting connection</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🪟</div>
-              <h3>Window installation</h3>
-              <div class="price">€60 <small>/ window</small></div>
+              <h3 data-i18n="price2Title">Window installation</h3>
+              <div class="price">€60 <small data-i18n="priceUnitWindow">/ window</small></div>
               <ul>
-                <li>Old window removal</li>
-                <li>New frame installation</li>
-                <li>Sill and seal work</li>
+                <li data-i18n="price2L1">Old window removal</li>
+                <li data-i18n="price2L2">New frame installation</li>
+                <li data-i18n="price2L3">Sill and seal work</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🛠️</div>
-              <h3>Repair</h3>
-              <div class="price">€30 <small>/ service</small></div>
+              <h3 data-i18n="price3Title">Repair</h3>
+              <div class="price">€30 <small data-i18n="priceUnitService2">/ service</small></div>
               <ul>
-                <li>Hardware adjustment</li>
-                <li>Door and frame repair</li>
-                <li>Wooden element restoration</li>
+                <li data-i18n="price3L1">Hardware adjustment</li>
+                <li data-i18n="price3L2">Door and frame repair</li>
+                <li data-i18n="price3L3">Wooden element restoration</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🎨</div>
-              <h3>Painting</h3>
-              <div class="price">€40 <small>/ frame</small></div>
+              <h3 data-i18n="price4Title">Painting</h3>
+              <div class="price">€40 <small data-i18n="priceUnitFrame">/ frame</small></div>
               <ul>
-                <li>Surface prep</li>
-                <li>Priming</li>
-                <li>Two-layer painting</li>
+                <li data-i18n="price4L1">Surface prep</li>
+                <li data-i18n="price4L2">Priming</li>
+                <li data-i18n="price4L3">Two-layer painting</li>
               </ul>
             </article>
           </div>
@@ -473,21 +506,21 @@
       <section id="faq" class="section" style="background: white;">
         <div class="container">
           <div class="section-header">
-            <span>FAQ</span>
-            <h2>Common questions</h2>
+            <span data-i18n="faqTag">FAQ</span>
+            <h2 data-i18n="faqTitle">Common questions</h2>
           </div>
           <div style="max-width: 900px; margin: 0 auto; display: grid; gap: 16px;">
             <div class="feature" style="padding: 22px 24px;">
-              <h3>What guarantee do you provide?</h3>
-              <p>We offer an official quality guarantee between 12 and 36 months depending on service.</p>
+              <h3 data-i18n="faqQ1">What guarantee do you provide?</h3>
+              <p data-i18n="faqA1">We offer an official quality guarantee between 12 and 36 months depending on service.</p>
             </div>
             <div class="feature" style="padding: 22px 24px;">
-              <h3>Can you do emergency service the same day?</h3>
-              <p>Yes, emergency dispatch is available within 1–2 hours in the city.</p>
+              <h3 data-i18n="faqQ2">Can you do emergency service the same day?</h3>
+              <p data-i18n="faqA2">Yes, emergency dispatch is available within 1–2 hours in the city.</p>
             </div>
             <div class="feature" style="padding: 22px 24px;">
-              <h3>How is payment handled?</h3>
-              <p>Payment is made after completion and a final quality check by the client.</p>
+              <h3 data-i18n="faqQ3">How is payment handled?</h3>
+              <p data-i18n="faqA3">Payment is made after completion and a final quality check by the client.</p>
             </div>
           </div>
         </div>
@@ -496,40 +529,40 @@
       <section id="contact" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Contact</span>
-            <h2>Get in touch</h2>
+            <span data-i18n="contactTag">Contact</span>
+            <h2 data-i18n="contactTitle">Get in touch</h2>
           </div>
           <div class="contact-wrap">
             <div class="info-box">
               <div class="info-item">
                 <div class="info-icon">📞</div>
                 <div>
-                  <strong>Phone</strong><br />
+                  <strong data-i18n="phoneLabel">Phone</strong><br />
                   +38 (050) 123-45-67
                 </div>
               </div>
               <div class="info-item">
                 <div class="info-icon">✉️</div>
                 <div>
-                  <strong>Email</strong><br />
+                  <strong data-i18n="emailLabel">Email</strong><br />
                   support@masterfix-pro.example
                 </div>
               </div>
               <div class="info-item">
                 <div class="info-icon">📍</div>
                 <div>
-                  <strong>Office</strong><br />
-                  Central St. 12, Kyiv, Ukraine
+                  <strong data-i18n="addressLabel">Office</strong><br />
+                  <span data-i18n="addressText">Central St. 12, Kyiv, Ukraine</span>
                 </div>
               </div>
             </div>
 
             <div class="contact-form">
               <form>
-                <input type="text" placeholder="Your name" />
-                <input type="tel" placeholder="Phone number" />
-                <textarea rows="5" placeholder="Your message"></textarea>
-                <button class="cta" type="submit">Send message</button>
+                <input type="text" data-i18n-placeholder="namePlaceholder2" placeholder="Your name" />
+                <input type="tel" data-i18n-placeholder="phonePlaceholder2" placeholder="Phone number" />
+                <textarea rows="5" data-i18n-placeholder="messagePlaceholder" placeholder="Your message"></textarea>
+                <button class="cta" type="submit" data-i18n="sendMessage">Send message</button>
               </form>
             </div>
           </div>
@@ -540,8 +573,151 @@
     <footer>
       <div class="container footer-row">
         <div>© 2026 MasterFix Pro</div>
-        <div>Professional home services</div>
+        <div data-i18n="footerText">Professional home services</div>
       </div>
     </footer>
+
+    <script>
+      const translations = {
+        uk: {
+          siteTitle: 'MasterFix Pro',
+          navHome: 'Головна', navServices: 'Послуги', navAbout: 'Про нас', navPricing: 'Ціни', navFaq: 'FAQ', navContact: 'Контакти',
+          ctaBook: 'Замовити дзвінок',
+          eyebrow: 'Висока якість та гарантія',
+          heroTitle: 'Професійний ремонт і встановлення для вашого дому.',
+          heroText: 'Комплексні послуги з електрики, монтажу вікон, ремонту, фарбування та реставрації від досвідчених фахівців.',
+          heroCTA1: 'Розрахувати вартість', heroCTA2: 'Наші послуги',
+          quickRequest: 'Швидка заявка', namePlaceholder: 'Ваше імʼя', phonePlaceholder: 'Номер телефону', requestCall: 'Замовити дзвінок',
+          servicesTag: 'Наші роботи', servicesTitle: 'Основні послуги', servicesText: 'Ми надаємо надійні послуги для дому з прозорими цінами та гарантією якості.',
+          service1Title: 'Електромонтаж', service1Text: 'Проводка, розетки, вимикачі, автоматика та діагностика.',
+          service2Title: 'Монтаж вікон', service2Text: 'Професійний монтаж пластикових, алюмінієвих та дерев’яних вікон.',
+          service3Title: 'Ремонт вікон', service3Text: 'Ремонт рам, дерев’яних деталей, ущільнювачів та фурнітури.',
+          service4Title: 'Фарбування вікон', service4Text: 'Сучасне оновлення віконних рам у потрібний колір.',
+          stat1: 'Років досвіду', stat2: 'Завершених замовлень', stat3: 'Гарантія якості',
+          aboutTag: 'Про нас', aboutTitle: 'Команда професіоналів', aboutText: 'Наші майстри працюють за перевіреними методами, якісними матеріалами та з урахуванням довговічності.',
+          pricingTag: 'Ціни', pricingTitle: 'Прозорі ціни', pricingText: 'Орієнтовні тарифи на основні послуги для будинку.',
+          price1Title: 'Електрика', price2Title: 'Монтаж вікон', price3Title: 'Ремонт', price4Title: 'Фарбування',
+          priceUnitService: '/ послуга', priceUnitWindow: '/ вікно', priceUnitFrame: '/ рама',
+          price1L1: 'Монтаж розетки', price1L2: 'Встановлення автомата', price1L3: 'Підключення освітлення',
+          price2L1: 'Видалення старого вікна', price2L2: 'Монтаж нової рами', price2L3: 'Робота з підвіконням та ущільненням',
+          price3L1: 'Регулювання фурнітури', price3L2: 'Ремонт дверей та рам', price3L3: 'Реставрація дерев’яних елементів',
+          price4L1: 'Підготовка поверхні', price4L2: 'Ґрунтування', price4L3: 'Фарбування у два шари',
+          faqTag: 'FAQ', faqTitle: 'Поширені питання', faqQ1: 'Яку гарантію ви надаєте?', faqA1: 'Ми надаємо офіційну гарантію від 12 до 36 місяців залежно від послуги.', faqQ2: 'Чи можлива термінова послуга в день звернення?', faqA2: 'Так, аварійний виїзд доступний протягом 1–2 годин по місту.', faqQ3: 'Як відбувається оплата?', faqA3: 'Оплата здійснюється після завершення робіт та фінальної перевірки якості.',
+          contactTag: 'Контакти', contactTitle: 'Зв’яжіться з нами', phoneLabel: 'Телефон', emailLabel: 'Електронна пошта', addressLabel: 'Офіс', addressText: 'вул. Центральна, 12, Київ, Україна',
+          namePlaceholder2: 'Ваше імʼя', phonePlaceholder2: 'Номер телефону', messagePlaceholder: 'Ваше повідомлення', sendMessage: 'Надіслати повідомлення', footerText: 'Професійні послуги для дому'
+        },
+        ru: {
+          siteTitle: 'MasterFix Pro',
+          navHome: 'Главная', navServices: 'Услуги', navAbout: 'О нас', navPricing: 'Цены', navFaq: 'FAQ', navContact: 'Контакты',
+          ctaBook: 'Заказать звонок',
+          eyebrow: 'Высокое качество и гарантия',
+          heroTitle: 'Профессиональный ремонт и установка для вашего дома.',
+          heroText: 'Комплексные услуги по электрике, монтажу окон, ремонту, покраске и реставрации от опытных специалистов.',
+          heroCTA1: 'Рассчитать стоимость', heroCTA2: 'Наши услуги',
+          quickRequest: 'Быстрая заявка', namePlaceholder: 'Ваше имя', phonePlaceholder: 'Номер телефона', requestCall: 'Заказать звонок',
+          servicesTag: 'Наши работы', servicesTitle: 'Основные услуги', servicesText: 'Мы предоставляем надежные услуги для дома с прозрачными ценами и гарантией качества.',
+          service1Title: 'Электромонтаж', service1Text: 'Проводка, розетки, выключатели, автоматика и диагностика.',
+          service2Title: 'Монтаж окон', service2Text: 'Профессиональная установка пластиковых, алюминиевых и деревянных окон.',
+          service3Title: 'Ремонт окон', service3Text: 'Ремонт рам, деревянных элементов, уплотнителей и фурнитуры.',
+          service4Title: 'Покраска окон', service4Text: 'Современное обновление оконных рам в нужный цвет.',
+          stat1: 'Лет опыта', stat2: 'Завершенных заказов', stat3: 'Гарантия качества',
+          aboutTag: 'О нас', aboutTitle: 'Команда профессионалов', aboutText: 'Наши мастера работают по проверенным методам, качественным материалам и с учетом долговечности.',
+          pricingTag: 'Цены', pricingTitle: 'Прозрачные цены', pricingText: 'Ориентировочные тарифы на основные услуги для дома.',
+          price1Title: 'Электрика', price2Title: 'Монтаж окон', price3Title: 'Ремонт', price4Title: 'Покраска',
+          priceUnitService: '/ услуга', priceUnitWindow: '/ окно', priceUnitFrame: '/ рама',
+          price1L1: 'Монтаж розетки', price1L2: 'Установка автомата', price1L3: 'Подключение освещения',
+          price2L1: 'Удаление старого окна', price2L2: 'Монтаж новой рамы', price2L3: 'Работы с подоконником и уплотнением',
+          price3L1: 'Регулировка фурнитуры', price3L2: 'Ремонт дверей и рам', price3L3: 'Реставрация деревянных элементов',
+          price4L1: 'Подготовка поверхности', price4L2: 'Грунтовка', price4L3: 'Покраска в два слоя',
+          faqTag: 'FAQ', faqTitle: 'Частые вопросы', faqQ1: 'Какую гарантию вы даёте?', faqA1: 'Мы предоставляем официальную гарантию от 12 до 36 месяцев в зависимости от услуги.', faqQ2: 'Возможна срочная услуга в день обращения?', faqA2: 'Да, аварийный выезд доступен в течение 1–2 часов по городу.', faqQ3: 'Как происходит оплата?', faqA3: 'Оплата производится после завершения работ и финальной проверки качества.',
+          contactTag: 'Контакты', contactTitle: 'Свяжитесь с нами', phoneLabel: 'Телефон', emailLabel: 'Электронная почта', addressLabel: 'Офис', addressText: 'ул. Центральная, 12, Киев, Украина',
+          namePlaceholder2: 'Ваше имя', phonePlaceholder2: 'Номер телефона', messagePlaceholder: 'Ваше сообщение', sendMessage: 'Отправить сообщение', footerText: 'Профессиональные услуги для дома'
+        },
+        de: {
+          siteTitle: 'MasterFix Pro',
+          navHome: 'Startseite', navServices: 'Dienstleistungen', navAbout: 'Über uns', navPricing: 'Preise', navFaq: 'FAQ', navContact: 'Kontakt',
+          ctaBook: 'Anruf buchen',
+          eyebrow: 'Hohe Qualität und Garantie',
+          heroTitle: 'Professionelle Reparatur und Installation für Ihr Zuhause.',
+          heroText: 'Umfassende Elektroarbeiten, Fensterinstallation, Reparatur, Anstrich und Restaurierung von erfahrenen Fachleuten.',
+          heroCTA1: 'Kosten berechnen', heroCTA2: 'Unsere Leistungen',
+          quickRequest: 'Schnellanfrage', namePlaceholder: 'Ihr Name', phonePlaceholder: 'Telefonnummer', requestCall: 'Anruf anfragen',
+          servicesTag: 'Unsere Arbeit', servicesTitle: 'Hauptleistungen', servicesText: 'Wir bieten zuverlässige Hausserviceleistungen mit transparenten Preisen und Qualitätsgarantie.',
+          service1Title: 'Elektroarbeiten', service1Text: 'Verdrahtung, Steckdosen, Schalter, Automatik und Diagnostik.',
+          service2Title: 'Fensterinstallation', service2Text: 'Professioneller Einbau von Kunststoff-, Aluminium- und Holzfenstern.',
+          service3Title: 'Fensterreparatur', service3Text: 'Reparatur von Rahmen, Holzteilen, Dichtungen und Beschlägen.',
+          service4Title: 'Fensteranstrich', service4Text: 'Moderne Auffrischung von Fensterrahmen in der gewünschten Farbe.',
+          stat1: 'Jahre Erfahrung', stat2: 'Abgeschlossene Aufträge', stat3: 'Qualitätsgarantie',
+          aboutTag: 'Über uns', aboutTitle: 'Team von Fachleuten', aboutText: 'Unsere Handwerker arbeiten nach bewährten Methoden, hochwertigen Materialien und mit Blick auf Langlebigkeit.',
+          pricingTag: 'Preise', pricingTitle: 'Transparente Preise', pricingText: 'Geschätzte Tarife für grundlegende Hausprojekte.',
+          price1Title: 'Elektrik', price2Title: 'Fensterinstallation', price3Title: 'Reparatur', price4Title: 'Anstrich',
+          priceUnitService: '/ Dienstleistung', priceUnitWindow: '/ Fenster', priceUnitFrame: '/ Rahmen',
+          price1L1: 'Steckdosenmontage', price1L2: 'Leitungsschutzschalter', price1L3: 'Beleuchtungsanschluss',
+          price2L1: 'Entfernung des alten Fensters', price2L2: 'Einbau eines neuen Rahmens', price2L3: 'Arbeiten an Fensterbrett und Dichtung',
+          price3L1: 'Beschlagjustierung', price3L2: 'Reparatur von Türen und Rahmen', price3L3: 'Restaurierung von Holzelementen',
+          price4L1: 'Oberflächenvorbereitung', price4L2: 'Grundierung', price4L3: 'Zweischichtige Farbgebung',
+          faqTag: 'FAQ', faqTitle: 'Häufige Fragen', faqQ1: 'Welche Garantie geben Sie?', faqA1: 'Wir bieten je nach Dienstleistung eine offizielle Qualitätgarantie von 12 bis 36 Monaten.', faqQ2: 'Ist ein Notfalldienst am selben Tag möglich?', faqA2: 'Ja, der Notfalldienst ist innerhalb von 1–2 Stunden in der Stadt verfügbar.', faqQ3: 'Wie läuft die Bezahlung?', faqA3: 'Die Zahlung erfolgt nach Abschluss der Arbeiten und der abschließenden Qualitätsprüfung.',
+          contactTag: 'Kontakt', contactTitle: 'Kontakt aufnehmen', phoneLabel: 'Telefon', emailLabel: 'E-Mail', addressLabel: 'Büro', addressText: 'Zentralstraße 12, Kiew, Ukraine',
+          namePlaceholder2: 'Ihr Name', phonePlaceholder2: 'Telefonnummer', messagePlaceholder: 'Ihre Nachricht', sendMessage: 'Nachricht senden', footerText: 'Professioneller Hausservice'
+        },
+        es: {
+          siteTitle: 'MasterFix Pro',
+          navHome: 'Inicio', navServices: 'Servicios', navAbout: 'Sobre nosotros', navPricing: 'Precios', navFaq: 'FAQ', navContact: 'Contacto',
+          ctaBook: 'Reservar llamada',
+          eyebrow: 'Alta calidad y garantía',
+          heroTitle: 'Reparación e instalación profesional para su hogar.',
+          heroText: 'Servicios integrales de electricidad, instalación de ventanas, reparación, pintura y restauración por especialistas experimentados.',
+          heroCTA1: 'Calcular costo', heroCTA2: 'Nuestros servicios',
+          quickRequest: 'Solicitud rápida', namePlaceholder: 'Tu nombre', phonePlaceholder: 'Número de teléfono', requestCall: 'Solicitar llamada',
+          servicesTag: 'Nuestro trabajo', servicesTitle: 'Servicios principales', servicesText: 'Ofrecemos servicios fiables para el hogar con precios transparentes y garantía de calidad.',
+          service1Title: 'Electricidad', service1Text: 'Cableado, enchufes, interruptores, automatización y diagnóstico.',
+          service2Title: 'Instalación de ventanas', service2Text: 'Montaje profesional de ventanas de plástico, aluminio y madera.',
+          service3Title: 'Reparación de ventanas', service3Text: 'Reparación de marcos, elementos de madera, sellos y herrajes.',
+          service4Title: 'Pintura de ventanas', service4Text: 'Actualización moderna de marcos de ventanas en el color deseado.',
+          stat1: 'Años de experiencia', stat2: 'Pedidos completados', stat3: 'Garantía de calidad',
+          aboutTag: 'Sobre nosotros', aboutTitle: 'Equipo de profesionales', aboutText: 'Nuestros artesanos trabajan con métodos comprobados, materiales de calidad y pensando en la durabilidad.',
+          pricingTag: 'Precios', pricingTitle: 'Precios transparentes', pricingText: 'Tarifas estimadas para proyectos básicos del hogar.',
+          price1Title: 'Electricidad', price2Title: 'Instalación de ventanas', price3Title: 'Reparación', price4Title: 'Pintura',
+          priceUnitService: '/ servicio', priceUnitWindow: '/ ventana', priceUnitFrame: '/ marco',
+          price1L1: 'Instalación de enchufes', price1L2: 'Montaje del interruptor', price1L3: 'Conexión de iluminación',
+          price2L1: 'Retiro de la ventana antigua', price2L2: 'Instalación de un nuevo marco', price2L3: 'Trabajo con alféizar y sellado',
+          price3L1: 'Ajuste de herrajes', price3L2: 'Reparación de puertas y marcos', price3L3: 'Restauración de elementos de madera',
+          price4L1: 'Preparación de superficie', price4L2: 'Imprimación', price4L3: 'Pintura en dos capas',
+          faqTag: 'FAQ', faqTitle: 'Preguntas frecuentes', faqQ1: '¿Qué garantía ofrecen?', faqA1: 'Ofrecemos una garantía oficial de calidad de 12 a 36 meses según el servicio.', faqQ2: '¿Hay servicio de urgencia el mismo día?', faqA2: 'Sí, el servicio urgente está disponible en 1–2 horas en la ciudad.', faqQ3: '¿Cómo se realiza el pago?', faqA3: 'El pago se realiza tras la finalización del trabajo y la comprobación final de calidad.',
+          contactTag: 'Contacto', contactTitle: 'Póngase en contacto', phoneLabel: 'Teléfono', emailLabel: 'Correo electrónico', addressLabel: 'Oficina', addressText: 'Calle Central 12, Kiev, Ucrania',
+          namePlaceholder2: 'Tu nombre', phonePlaceholder2: 'Número de teléfono', messagePlaceholder: 'Tu mensaje', sendMessage: 'Enviar mensaje', footerText: 'Servicios profesionales para el hogar'
+        }
+      };
+
+      const langButtons = document.querySelectorAll('.lang-btn');
+      const i18nNodes = document.querySelectorAll('[data-i18n]');
+      const placeholderNodes = document.querySelectorAll('[data-i18n-placeholder]');
+
+      function applyLanguage(lang) {
+        const dict = translations[lang] || translations.uk;
+        document.documentElement.lang = lang;
+        document.title = dict.siteTitle;
+
+        i18nNodes.forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (dict[key]) node.textContent = dict[key];
+        });
+
+        placeholderNodes.forEach((node) => {
+          const key = node.getAttribute('data-i18n-placeholder');
+          if (dict[key]) node.setAttribute('placeholder', dict[key]);
+        });
+
+        langButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+      }
+
+      langButtons.forEach((btn) => {
+        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+      });
+
+      applyLanguage('uk');
+    </script>
   </body>
 </html>
