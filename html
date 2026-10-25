@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MasterFix Pro | Professional Home Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-emerald-600 text-white px-6 py-3 rounded-xl shadow-xl font-medium flex items-center space-x-3">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toast-msg">Success!</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" onclick="switchPage('home')" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-gradient-to-tr from-brand-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-wrench text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900">Master<span class="text-brand-600">Fix</span></span>
+                    <span class="block text-xs font-semibold tracking-wider text-slate-400 uppercase" data-i18n="brandSub">Pro Services</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden xl:flex items-center space-x-1">
+                <button onclick="switchPage('home')" data-nav="home" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navHome">Головна</button>
+                <button onclick="switchPage('services')" data-nav="services" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navServices">Послуги</button>
+                <button onclick="switchPage('about')" data-nav="about" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navAbout">Про нас</button>
+                <button onclick="switchPage('gallery')" data-nav="gallery" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navGallery">Галерея</button>
+                <button onclick="switchPage('pricing')" data-nav="pricing" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navPricing">Ціни</button>
+                <button onclick="switchPage('faq')" data-nav="faq" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navFaq">FAQ</button>
+                <button onclick="switchPage('reviews')" data-nav="reviews" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navReviews">Відгуки</button>
+                <button onclick="switchPage('calculator')" data-nav="calculator" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors text-brand-600 font-semibold" data-i18n="navCalc">Калькулятор</button>
+                <button onclick="switchPage('contact')" data-nav="contact" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-colors" data-i18n="navContact">Контакти</button>
+            </nav>
+
+            <!-- Language Switcher & Mobile Menu Toggle -->
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl px-3.5 py-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 cursor-pointer transition">
+                        <option value="uk">🇺🇦 UA</option>
+                        <option value="en">🇬🇧 EN</option>
+                        <option value="ru">🇷🇺 RU</option>
+                        <option value="de">🇩🇪 DE</option>
+                        <option value="pl">🇵🇱 PL</option>
+                    </select>
+                </div>
+                <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden xl:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-1 shadow-lg">
+            <button onclick="switchPage('home'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navHome">Головна</button>
+            <button onclick="switchPage('services'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navServices">Послуги</button>
+            <button onclick="switchPage('about'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navAbout">Про нас</button>
+            <button onclick="switchPage('gallery'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navGallery">Галерея</button>
+            <button onclick="switchPage('pricing'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navPricing">Ціни</button>
+            <button onclick="switchPage('faq'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navFaq">FAQ</button>
+            <button onclick="switchPage('reviews'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navReviews">Відгуки</button>
+            <button onclick="switchPage('calculator'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-brand-600 bg-brand-50 font-semibold" data-i18n="navCalc">Калькулятор</button>
+            <button onclick="switchPage('contact'); toggleMobileMenu();" class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600" data-i18n="navContact">Контакти</button>
+        </div>
+    </header>
+
+    <!-- Main App Container (9 Pages) -->
+    <main class="flex-grow">
+
+        <!-- PAGE 1: HOME -->
+        <section id="page-home" class="page-section active">
+            <!-- Hero Header -->
+            <div class="relative bg-gradient-to-br from-slate-900 via-indigo-950 to-brand-900 text-white py-24 lg:py-32 overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-flex items-center space-x-2 bg-brand-500/20 text-brand-300 px-4 py-1.5 rounded-full text-sm font-semibold border border-brand-500/30">
+                                <i class="fa-solid fa-star text-amber-400"></i> <span data-i18n="heroBadge">Висока якість робіт та гарантія</span>
+                            </span>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight" data-i18n="heroTitle">Професійний ремонт та встановлення для вашого дому</h1>
+                            <p class="text-lg sm:text-xl text-slate-300 max-w-2xl" data-i18n="heroSubtitle">Комплексні послуги електрика, встановлення, ремонт та фарбування вікон, а також відновлення дерев'яних елементів від кваліфікованих майстрів.</p>
+                            <div class="flex flex-wrap gap-4 pt-4">
+                                <button onclick="switchPage('calculator')" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-brand-600/30 transition transform hover:-translate-y-0.5 flex items-center space-x-3">
+                                    <span data-i18n="heroBtnCalc">Розрахувати вартість</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="switchPage('services')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-xl border border-white/20 transition backdrop-blur-sm" data-i18n="heroBtnServices">Наші послуги</button>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl space-y-6">
+                                <h3 class="text-2xl font-bold text-white" data-i18n="heroFormTitle">Швидка заявка</h3>
+                                <p class="text-sm text-slate-300" data-i18n="heroFormSub">Залиште контакти, і ми передзвонимо вам протягом 15 хвилин.</p>
+                                <form onsubmit="handleQuickLead(event)" class="space-y-4">
+                                    <div>
+                                        <input type="text" id="qlName" required placeholder="Ваше ім'я" data-i18n-placeholder="phName" class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3.5 text-white placeholder-slate-400 focus:outline-none focus:border-brand-500">
+                                    </div>
+                                    <div>
+                                        <input type="tel" id="qlPhone" required placeholder="Номер телефону" data-i18n-placeholder="phPhone" class="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3.5 text-white placeholder-slate-400 focus:outline-none focus:border-brand-500">
+                                    </div>
+                                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg transition" data-i18n="heroFormBtn">Замовити дзвінок</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights / Services Preview -->
+            <div class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="servSectionTag">Напрямки роботи</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="servSectionTitle">Наші ключові послуги</h2>
+                        <p class="text-slate-600 mt-4 text-lg" data-i18n="servSectionDesc">Ми виконуємо повний спектр робіт по дому з офіційною гарантією якості.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Service 1 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:shadow-xl transition group">
+                            <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="s1Title">Електрика</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="s1Desc">Монтаж проводки, встановлення розеток, вимикачів, автоматів та повне усунення несправностей.</p>
+                            <button onclick="switchPage('services')" class="text-brand-600 font-semibold text-sm inline-flex items-center space-x-2 group-hover:translate-x-1 transition-transform">
+                                <span data-i18n="moreDetails">Детальніше</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <!-- Service 2 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:shadow-xl transition group">
+                            <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-window-maximize"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="s2Title">Встановлення вікон</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="s2Desc">Професійний монтаж пластикових і дерев'яних вікон з герметизацією та регулюванням фурнітури.</p>
+                            <button onclick="switchPage('services')" class="text-brand-600 font-semibold text-sm inline-flex items-center space-x-2 group-hover:translate-x-1 transition-transform">
+                                <span data-i18n="moreDetails">Детальніше</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <!-- Service 3 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:shadow-xl transition group">
+                            <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-hammer"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="s3Desc">Відновлення віконних систем, ремонт порогів та поручнів з дерева, реставрація покриття.</p>
+                            <button onclick="switchPage('services')" class="text-brand-600 font-semibold text-sm inline-flex items-center space-x-2 group-hover:translate-x-1 transition-transform">
+                                <span data-i18n="moreDetails">Детальніше</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <!-- Service 4 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-8 hover:shadow-xl transition group">
+                            <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-paint-roller"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3" data-i18n="s4Title">Фарбування вікон</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="s4Desc">Якісне оновлення зовнішнього вигляду вікон спеціальними атмосферостійкими фарбами.</p>
+                            <button onclick="switchPage('services')" class="text-brand-600 font-semibold text-sm inline-flex items-center space-x-2 group-hover:translate-x-1 transition-transform">
+                                <span data-i18n="moreDetails">Детальніше</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: SERVICES -->
+        <section id="page-services" class="page-section py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navServices">Послуги</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="servFullTitle">Повний каталог наших послуг</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="servFullDesc">Детальний опис кожного напрямку робіт, які ми виконуємо професійно.</p>
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Detailed Service 1 -->
+                    <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-5">
+                            <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Electrical+Works" alt="Електрика" class="rounded-2xl shadow-md w-full object-cover h-72">
+                        </div>
+                        <div class="lg:col-span-7 space-y-4">
+                            <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full" data-i18n="s1Tag">Категорія 01</span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="s1Title">Електрика</h3>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="s1LongDesc">Професійний монтаж та заміна електропроводки у квартирах, будинках та комерційних приміщеннях. Встановлення та підключення розеток, вимикачів, люстр, світлодіодного підсвічування, збір щитків із захисною автоматикою (УЗО, дивавтомати).</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-slate-700 text-sm font-medium">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s1_l1">Діагностика несправностей</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s1_l2">Монтаж кабелю та каналів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s1_l3">Підключення побутових приладів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s1_l4">Аварійний виїзд майстра</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Service 2 -->
+                    <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-5 lg:order-2">
+                            <img src="https://placehold.co/600x400/2563eb/ffffff?text=Window+Installation" alt="Встановлення вікон" class="rounded-2xl shadow-md w-full object-cover h-72">
+                        </div>
+                        <div class="lg:col-span-7 lg:order-1 space-y-4">
+                            <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full" data-i18n="s2Tag">Категорія 02</span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="s2Title">Встановлення вікон</h3>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="s2LongDesc">Якісний монтаж сучасних металопластикових, алюмінієвих та дерев'яних віконних конструкцій. Дотримання технологій теплоізоляції та герметизації монтажних швів для захисту від протягів та шуму.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-slate-700 text-sm font-medium">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s2_l1">Демонтаж старих вікон</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s2_l2">Встановлення підвіконь та відливів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s2_l3">Герметизація монтажною піною</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s2_l4">Фінальне регулювання фурнітури</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Service 3 -->
+                    <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-5">
+                            <img src="https://placehold.co/600x400/1d4ed8/ffffff?text=Window+Repair" alt="Ремонт вікон та дерев'яних елементів" class="rounded-2xl shadow-md w-full object-cover h-72">
+                        </div>
+                        <div class="lg:col-span-7 space-y-4">
+                            <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full" data-i18n="s3Tag">Категорія 03</span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</h3>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="s3LongDesc">Усунення продувань, заміна склопакетів, регулювання та заміна несправної фурнітури. Професійний ремонт та реставрація дерев'яних елементів інтер'єру: порогів, поручнів, сходинок та декоративних панелей.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-slate-700 text-sm font-medium">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s3_l1">Заміна ущільнювачів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s3_l2">Реставрація дерев'яних порогів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s3_l3">Ремонт і зміцнення поручнів</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s3_l4">Заміна розбитих склопакетів</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Service 4 -->
+                    <div class="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-5 lg:order-2">
+                            <img src="https://placehold.co/600x400/1e40af/ffffff?text=Window+Painting" alt="Фарбування вікон" class="rounded-2xl shadow-md w-full object-cover h-72">
+                        </div>
+                        <div class="lg:col-span-7 lg:order-1 space-y-4">
+                            <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full" data-i18n="s4Tag">Категорія 04</span>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-i18n="s4Title">Фарбування вікон</h3>
+                            <p class="text-slate-600 leading-relaxed" data-i18n="s4LongDesc">Оновлення та фарбування віконних рам з ПВХ, алюмінію та дерева. Використання професійних екологічних лакофарбових матеріалів, стійких до ультрафіолету, вологи та перепадів температур.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-slate-700 text-sm font-medium">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s4_l1">Підготовка та шліфування</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s4_l2">Ґрунтування та захист</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s4_l3">Фарбування в будь-які кольори RAL</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="s4_l4">Рівне покриття без патьоків</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: ABOUT US -->
+        <section id="page-about" class="page-section py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navAbout">Про нас</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-i18n="aboutTitle">Команда професіоналів з багаторічним досвідом</h2>
+                        <p class="text-slate-600 leading-relaxed" data-i18n="aboutDesc1">Компанія MasterFix Pro об'єднує висококласних майстрів своєї справи. Ми пишаємося кожним виконаним проектом, працюємо виключно з професійним інструментом та перевіреними матеріалами.</p>
+                        <p class="text-slate-600 leading-relaxed" data-i18n="aboutDesc2">Наша мета — надати клієнтам бездоганний сервіс, прозорі ціни та тривалу гарантію на всі види виконаних робіт.</p>
+                        <div class="grid grid-cols-3 gap-6 pt-4">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                                <span class="block text-3xl font-extrabold text-brand-600">10+</span>
+                                <span class="text-xs font-semibold text-slate-500 uppercase" data-i18n="stat1">Років досвіду</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                                <span class="block text-3xl font-extrabold text-brand-600">3500+</span>
+                                <span class="text-xs font-semibold text-slate-500 uppercase" data-i18n="stat2">Замовлень</span>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                                <span class="block text-3xl font-extrabold text-brand-600">100%</span>
+                                <span class="text-xs font-semibold text-slate-500 uppercase" data-i18n="stat3">Гарантія</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-6">
+                        <img src="https://placehold.co/600x500/1e293b/ffffff?text=Our+Team+At+Work" alt="Наша команда" class="rounded-3xl shadow-xl w-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: GALLERY -->
+        <section id="page-gallery" class="page-section py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navGallery">Галерея</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="galTitle">Приклади наших робіт</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="galDesc">Ознайомтесь з реалізованими проектами з електрики, встановлення та реставрації вікон.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Gallery Item 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Electrical+Panel" alt="Електрощиток" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s1Title">Електрика</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g1Title">Збирання сучасного електрощита</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g1Desc">Монтаж автоматів захисту у квартирі новобудови.</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/2563eb/ffffff?text=Window+Mount" alt="Встановлення вікна" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s2Title">Встановлення вікон</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g2Title">Монтаж енергозберігаючих вікон</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g2Desc">Комплексна установка у приватному котеджі.</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/1d4ed8/ffffff?text=Wooden+Stairs+Repair" alt="Дерев'яні елементи" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g3Title">Реставрація дерев'яного порогові та поручнів</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g3Desc">Відновлення первинного вигляду та лакування.</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 4 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/1e40af/ffffff?text=Window+Painting" alt="Фарбування вікон" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s4Title">Фарбування вікон</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g4Title">Фарбування рам у колір RAL 7016</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g4Desc">Надання сучасного стилю старому фасаду.</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 5 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/0284c7/ffffff?text=Socket+Installation" alt="Розетки" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s1Title">Електрика</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g5Title">Монтаж прихованих розеток</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g5Desc">Встановлення блоків роз'ємів у робочій зоні кухні.</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 6 -->
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition">
+                        <img src="https://placehold.co/600x400/0369a1/ffffff?text=Window+Adjustment" alt="Регулювання вікон" class="w-full h-60 object-cover">
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-brand-600 uppercase" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</span>
+                            <h4 class="text-lg font-bold text-slate-900 mt-1" data-i18n="g6Title">Сервісне обслуговування вікон</h4>
+                            <p class="text-slate-600 text-sm mt-2" data-i18n="g6Desc">Заміна ущільнювачів та регулювання притиску.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: PRICING -->
+        <section id="page-pricing" class="page-section py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navPricing">Ціни</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="priceTitle">Прозорі та доступні ціни</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="priceDesc">Орієнтовна вартість базових послуг наших майстрів.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Price Card 1 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="s1Title">Електрика</h3>
+                            <p class="text-slate-500 text-sm mb-6" data-i18n="p1Sub">Монтаж та підключення</p>
+                            <div class="text-3xl font-extrabold text-slate-900 mb-6">від €25 <span class="text-sm font-normal text-slate-500" data-i18n="perService">/ послуга</span></div>
+                            <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p1_1">Встановлення розетки / вимикача</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p1_2">Монтаж автомата в щиток</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p1_3">Підключення люстри</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="switchPage('calculator')" class="w-full bg-white hover:bg-brand-50 text-brand-600 font-semibold py-3 rounded-xl border border-brand-200 transition" data-i18n="orderBtn">Замовити</button>
+                    </div>
+
+                    <!-- Price Card 2 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-window-maximize"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="s2Title">Встановлення вікон</h3>
+                            <p class="text-slate-500 text-sm mb-6" data-i18n="p2Sub">Монтаж та герметизація</p>
+                            <div class="text-3xl font-extrabold text-slate-900 mb-6">від €60 <span class="text-sm font-normal text-slate-500" data-i18n="perWindow">/ вікно</span></div>
+                            <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p2_1">Демонтаж старого вікна</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p2_2">Встановлення нового вікна</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p2_3">Монтаж підвіконня</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="switchPage('calculator')" class="w-full bg-white hover:bg-brand-50 text-brand-600 font-semibold py-3 rounded-xl border border-brand-200 transition" data-i18n="orderBtn">Замовити</button>
+                    </div>
+
+                    <!-- Price Card 3 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-hammer"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2 text-balance" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</h3>
+                            <p class="text-slate-500 text-sm mb-6" data-i18n="p3Sub">Реставрація та регулювання</p>
+                            <div class="text-3xl font-extrabold text-slate-900 mb-6">від €30 <span class="text-sm font-normal text-slate-500" data-i18n="perService">/ послуга</span></div>
+                            <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p3_1">Регулювання фурнітури</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p3_2">Ремонт дерев'яного порогу</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p3_3">Відновлення поручнів</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="switchPage('calculator')" class="w-full bg-white hover:bg-brand-50 text-brand-600 font-semibold py-3 rounded-xl border border-brand-200 transition" data-i18n="orderBtn">Замовити</button>
+                    </div>
+
+                    <!-- Price Card 4 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl mb-6">
+                                <i class="fa-solid fa-paint-roller"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="s4Title">Фарбування вікон</h3>
+                            <p class="text-slate-500 text-sm mb-6" data-i18n="p4Sub">Оновлення покриття рам</p>
+                            <div class="text-3xl font-extrabold text-slate-900 mb-6">від €40 <span class="text-sm font-normal text-slate-500" data-i18n="perWindow">/ вікно</span></div>
+                            <ul class="space-y-3 text-sm text-slate-700 mb-8">
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p4_1">Підготовка та шліфування</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p4_2">Ґрунтування поверхні</span></li>
+                                <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-600"></i> <span data-i18n="p4_3">Фарбування у два шари</span></li>
+                            </ul>
+                        </div>
+                        <button onclick="switchPage('calculator')" class="w-full bg-white hover:bg-brand-50 text-brand-600 font-semibold py-3 rounded-xl border border-brand-200 transition" data-i18n="orderBtn">Замовити</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: FAQ -->
+        <section id="page-faq" class="page-section py-20 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navFaq">FAQ</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="faqTitle">Часті запитання та відповіді</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="faqDesc">Знайдіть відповіді на найпоширеніші запитання про наші послуги.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- FAQ 1 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-900 flex justify-between items-center cursor-pointer">
+                            <span data-i18n="q1">Яка гарантія надається на виконані роботи?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-600 text-sm"></i>
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed" data-i18n="a1">Ми надаємо офіційну гарантію строком від 12 до 36 місяців на всі види електромонтажних робіт, встановлення та ремонт вікон.</p>
+                    </div>
+                    <!-- FAQ 2 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-900 flex justify-between items-center cursor-pointer">
+                            <span data-i18n="q2">Чи можливий терміновий виїзд майстра в день замовлення?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-600 text-sm"></i>
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed" data-i18n="a2">Так, у нас є послуга аварійного виїзду майстра (електрика або віконника) протягом 1-2 годин по місту.</p>
+                    </div>
+                    <!-- FAQ 3 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-900 flex justify-between items-center cursor-pointer">
+                            <span data-i18n="q3">Як відбувається оплата за послуги?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-600 text-sm"></i>
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed" data-i18n="a3">Оплата здійснюється після завершення робіт та перевірки якості замовником (готівкою або безготівковим переказом).</p>
+                    </div>
+                    <!-- FAQ 4 -->
+                    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-900 flex justify-between items-center cursor-pointer">
+                            <span data-i18n="q4">Чи робите ви ремонт дерев'яних порогів та поручнів?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-600 text-sm"></i>
+                        </h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed" data-i18n="a4">Так, це одна з наших спеціалізацій. Ми відновлюємо пошкоджені дерев'яні пороги, зміцнюємо і фарбуємо поручні.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 7: REVIEWS -->
+        <section id="page-reviews" class="page-section py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navReviews">Відгуки</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="revTitle">Що кажуть наші клієнти</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="revDesc">Реальні відгуки задоволених замовників.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 space-x-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6" data-i18n="rev1Text">"Дуже вдячний за швидке встановлення вікон та регулювання. Майстри прийшли вчасно, зробили все акуратно і чисто."</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-brand-600 text-white rounded-full flex items-center font-bold justify-center">ОК</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Олександр Коваль</h4>
+                                <span class="text-xs text-slate-500" data-i18n="rev1Date">2 тижні тому</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 space-x-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6" data-i18n="rev2Text">"Замовляв послуги електрика для всієї квартири. Все зроблено за стандартами, схема проводки зрозуміла, безпека на висоті!"</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center font-bold justify-center">МП</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Марина Петренко</h4>
+                                <span class="text-xs text-slate-500" data-i18n="rev2Date">Місяць тому</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 space-x-1 mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed mb-6" data-i18n="rev3Text">"Відреставрували дерев'яні поручні та пороги на терасі, а також пофарбували віконні рами. Виглядає як нове! Рекомендую."</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-brand-800 text-white rounded-full flex items-center font-bold justify-center">ДБ</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm"> Дмитро Бондар</h4>
+                                <span class="text-xs text-slate-500" data-i18n="rev3Date">3 тижні тому</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 8: CALCULATOR / BOOKING -->
+        <section id="page-calculator" class="page-section py-20 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navCalc">Калькулятор</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="calcTitle">Розрахуйте вартість послуг онлайн</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="calcDesc">Оберіть необхідні опції та дізнайтеся приблизну ціну за кілька секунд.</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-8 lg:p-12 shadow-sm space-y-8">
+                    <!-- Service Type Selection -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-3" data-i18n="calcSelectService">Оберіть послугу:</label>
+                        <select id="calcService" onchange="calculateTotal()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-slate-800 font-medium focus:outline-none focus:border-brand-500">
+                            <option value="25" data-i18n="s1Title">Електрика (базова точка)</option>
+                            <option value="60" data-i18n="s2Title">Встановлення вікон (за 1 вікно)</option>
+                            <option value="45" data-i18n="s3Title">Ремонт вікон та дерев'яних елементів</option>
+                            <option value="40" data-i18n="s4Title">Фарбування вікон (за 1 раму)</option>
+                        </select>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div>
+                        <label class="block text-sm font-bold text-slate-900 mb-3" data-i18n="calcQuantity">Кількість (точок / вікон / послуг):</label>
+                        <input type="number" id="calcQty" value="1" min="1" max="100" oninput="calculateTotal()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3.5 text-slate-800 font-medium focus:outline-none focus:border-brand-500">
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="space-y-3 pt-2">
+                        <label class="block text-sm font-bold text-slate-900 mb-3" data-i18n="calcOptions">Додаткові опції:</label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" id="optUrgent" value="30" onchange="calculateTotal()" class="w-5 h-5 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+                            <span class="text-sm font-medium text-slate-700" data-i18n="optUrgentText">Терміновий виїзд (+€30)</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input type="checkbox" id="optMaterials" value="50" onchange="calculateTotal()" class="w-5 h-5 text-brand-600 rounded border-slate-300 focus:ring-brand-500">
+                            <span class="text-sm font-medium text-slate-700" data-i18n="optMaterialsText">З закупівлею та доставкою матеріалів (+€50)</span>
+                        </label>
+                    </div>
+
+                    <!-- Total Result Box -->
+                    <div class="bg-brand-50 border border-brand-200 rounded-2xl p-6 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 uppercase tracking-wider" data-i18n="totalEst">Орієнтовна вартість:</span>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-brand-900 mt-1" id="totalPrice">€75</div>
+                        </div>
+                        <button onclick="submitBooking()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition" data-i18n="bookBtn">Замовити розрахунок</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 9: CONTACT -->
+        <section id="page-contact" class="page-section py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-brand-600 font-bold uppercase tracking-wider text-sm" data-i18n="navContact">Контакти</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2" data-i18n="contactTitle">Зв'яжіться з нами</h2>
+                    <p class="text-slate-600 mt-4 text-lg" data-i18n="contactDesc">Ми готові відповісти на ваші запитання та прийняти замовлення.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-5 space-y-8">
+                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900" data-i18n="phoneLabel">Телефон</h4>
+                                    <p class="text-slate-600 text-sm mt-1">+38 (050) 123-45-67</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900" data-i18n="emailLabel">Електронна пошта</h4>
+                                    <p class="text-slate-600 text-sm mt-1">support@masterfix-pro.example</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900" data-i18n="addrLabel">Адреса офісу</h4>
+                                    <p class="text-slate-600 text-sm mt-1" data-i18n="addrValue">вул. Центральна, 12, Київ, Україна</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <form onsubmit="handleContactForm(event)" class="bg-slate-50 p-8 lg:p-10 rounded-3xl border border-slate-200 space-y-6">
+                            <h3 class="text-2xl font-bold text-slate-900" data-i18n="formHeader">Напишіть нам повідомлення</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="phName">Ваше ім'я</label>
+                                    <input type="text" id="cName" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="phPhone">Номер телефону</label>
+                                    <input type="tel" id="cPhone" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-brand-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="cMsgLabel">Повідомлення</label>
+                                <textarea id="cMessage" rows="4" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:border-brand-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 rounded-xl shadow-lg transition" data-i18n="cSubmitBtn">Надіслати повідомлення</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white border-t border-slate-800 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center text-white">
+                    <i class="fa-solid fa-wrench"></i>
+                </div>
+                <span class="text-lg font-bold">MasterFix Pro</span>
+            </div>
+            <p class="text-sm text-slate-400" data-i18n="copyright">&copy; 2026 MasterFix Pro. Усі права захищені.</p>
+            <div class="flex space-x-6 text-slate-400">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translations & Interactivity Script -->
+    <script>
+        const translations = {
+            uk: {
+                brandSub: "Професійні послуги",
+                navHome: "Головна",
+                navServices: "Послуги",
+                navAbout: "Про нас",
+                navGallery: "Галерея",
+                navPricing: "Ціни",
+                navFaq: "FAQ",
+                navReviews: "Відгуки",
+                navCalc: "Калькулятор",
+                navContact: "Контакти",
+                heroBadge: "Висока якість робіт та гарантія",
+                heroTitle: "Професійний ремонт та встановлення для вашого дому",
+                heroSubtitle: "Комплексні послуги електрика, встановлення, ремонт та фарбування вікон, а також відновлення дерев'яних елементів від кваліфікованих майстрів.",
+                heroBtnCalc: "Розрахувати вартість",
+                heroBtnServices: "Наші послуги",
+                heroFormTitle: "Швидка заявка",
+                heroFormSub: "Залиште контакти, і ми передзвонимо вам протягом 15 хвилин.",
+                phName: "Ваше ім'я",
+                phPhone: "Номер телефону",
+                heroFormBtn: "Замовити дзвінок",
+                servSectionTag: "Напрямки роботи",
+                servSectionTitle: "Наші ключові послуги",
+                servSectionDesc: "Ми виконуємо повний спектр робіт по дому з офіційною гарантією якості.",
+                moreDetails: "Детальніше",
+                s1Title: "Електрика",
+                s1Desc: "Монтаж проводки, встановлення розеток, вимикачів, автоматів та повне усунення несправностей.",
+                s2Title: "Встановлення вікон",
+                s2Desc: "Професійний монтаж пластикових і дерев'яних вікон з герметизацією та регулюванням фурнітури.",
+                s3Title: "Ремонт вікон та дерев'яних елементів",
+                s3Desc: "Відновлення віконних систем, ремонт порогів та поручнів з дерева, реставрація покриття.",
+                s4Title: "Фарбування вікон",
+                s4Desc: "Якісне оновлення зовнішнього вигляду вікон спеціальними атмосферостійкими фарбами.",
+                servFullTitle: "Повний каталог наших послуг",
+                servFullDesc: "Детальний опис кожного напрямку робіт, які ми виконуємо професійно.",
+                s1Tag: "Категорія 01",
+                s1LongDesc: "Професійний монтаж та заміна електропроводки у квартирах, будинках та комерційних приміщеннях. Встановлення та підключення розеток, вимикачів, люстр, світлодіодного підсвічування, збір щитків із захисною автоматикою.",
+                s1_l1: "Діагностика несправностей",
+                s1_l2: "Монтаж кабелю та каналів",
+                s1_l3: "Підключення побутових приладів",
+                s1_l4: "Аварійний виїзд майстра",
+                s2Tag: "Категорія 02",
+                s2LongDesc: "Якісний монтаж сучасних металопластикових, алюмінієвих та дерев'яних віконних конструкцій. Дотримання технологій теплоізоляції та герметизації.",
+                s2_l1: "Демонтаж старих вікон",
+                s2_l2: "Встановлення підвіконь та відливів",
+                s2_l3: "Герметизація монтажною піною",
+                s2_l4: "Фінальне регулювання фурнітури",
+                s3Tag: "Категорія 03",
+                s3LongDesc: "Усунення продувань, заміна склопакетів, регулювання та заміна несправної фурнітури. Ремонт та реставрація дерев'яних елементів інтер'єру: порогів, поручнів, сходинок.",
+                s3_l1: "Заміна ущільнювачів",
+                s3_l2: "Реставрація дерев'яних порогів",
+                s3_l3: "Ремонт і зміцнення поручнів",
+                s3_l4: "Заміна розбитих склопакетів",
+                s4Tag: "Категорія 04",
+                s4LongDesc: "Оновлення та фарбування віконних рам з ПВХ, алюмінію та дерева професійними екологічними лакофарбовими матеріалами.",
+                s4_l1: "Підготовка та шліфування",
+                s4_l2: "Ґрунтування та захист",
+                s4_l3: "Фарбування в будь-які кольори RAL",
+                s4_l4: "Рівне покриття без патьоків",
+                aboutTitle: "Команда професіоналів з багаторічним досвідом",
+                aboutDesc1: "Компанія MasterFix Pro об'єднує висококласних майстрів своєї справи. Працюємо виключно з професійним інструментом та перевіреними матеріалами.",
+                aboutDesc2: "Наша мета — надати клієнтам бездоганний сервіс, прозорі ціни та тривалу гарантію на всі види робіт.",
+                stat1: "Років досвіду",
+                stat2: "Замовлень",
+                stat3: "Гарантія",
+                galTitle: "Приклади наших робіт",
+                galDesc: "Ознайомтесь з реалізованими проектами з електрики, встановлення та реставрації вікон.",
+                g1Title: "Збирання сучасного електрощита",
+                g1Desc: "Монтаж автоматів захисту у квартирі новобудови.",
+                g2Title: "Монтаж енергозберігаючих вікон",
+                g2Desc: "Комплексна установка у приватному котеджі.",
+                g3Title: "Реставрація дерев'яного порогові та поручнів",
+                g3Desc: "Відновлення первинного вигляду та лакування.",
+                g4Title: "Фарбування рам у колір RAL 7016",
+                g4Desc: "Надання сучасного стилю старому фасаду.",
+                g5Title: "Монтаж прихованих розеток",
+                g5Desc: "Встановлення блоків роз'ємів у робочій зоні кухні.",
+                g6Title: "Сервісне обслуговування вікон",
+                g6Desc: "Заміна ущільнювачів та регулювання притиску.",
+                priceTitle: "Прозорі та доступні ціни",
+                priceDesc: "Орієнтовна вартість базових послуг наших майстрів.",
+                p1Sub: "Монтаж та підключення",
+                p2Sub: "Монтаж та герметизація",
+                p3Sub: "Реставрація та регулювання",
+                p4Sub: "Оновлення покриття рам",
+                perService: "/ послуга",
+                perWindow: "/ вікно",
+                p1_1: "Встановлення розетки / вимикача",
+                p1_2: "Монтаж автомата в щиток",
+                p1_3: "Підключення люстри",
+                p2_1: "Демонтаж старого вікна",
+                p2_2: "Встановлення нового вікна",
+                p2_3: "Монтаж підвіконня",
+                p3_1: "Регулювання фурнітури",
+                p3_2: "Ремонт дерев'яного порогу",
+                p3_3: "Відновлення поручнів",
+                p4_1: "Підготовка та шліфування",
+                p4_2: "Ґрунтування поверхні",
+                p4_3: "Фарбування у два шари",
+                orderBtn: "Замовити",
+                faqTitle: "Часті запитання та відповіді",
+                faqDesc: "Знайдіть відповіді на найпоширеніші запитання про наші послуги.",
+                q1: "Яка гарантія надається на виконані роботи?",
+                a1: "Ми надаємо офіційну гарантію строком від 12 до 36 місяців на всі види електромонтажних робіт, встановлення та ремонт вікон.",
+                q2: "Чи можливий терміновий виїзд майстра в день замовлення?",
+                a2: "Так, у нас є послуга аварійного виїзду майстра протягом 1-2 годин по місту.",
+                q3: "Як відбувається оплата за послуги?",
+                a3: "Оплата здійснюється після завершення робіт та перевірки якості замовником.",
+                q4: "Чи робите ви ремонт дерев'яних порогів та поручнів?",
+                a4: "Так, це одна з наших спеціалізацій. Ми відновлюємо пошкоджені дерев'яні пороги, зміцнюємо і фарбуємо поручні.",
+                revTitle: "Що кажуть наші клієнти",
+                revDesc: "Реальні відгуки задоволених замовників.",
+                rev1Text: "Дуже вдячний за швидке встановлення вікон та регулювання. Майстри прийшли вчасно, зробили все акуратно і чисто.",
+                rev1Date: "2 тижні тому",
+                rev2Text: "Замовляв послуги електрика для всієї квартири. Все зроблено за стандартами, безпека на висоті!",
+                rev2Date: "Місяць тому",
+                rev3Text: "Відреставрували дерев'яні поручні та пороги на терасі, а також пофарбували віконні рами. Виглядає як нове!",
+                rev3Date: "3 тижні тому",
+                calcTitle: "Розрахуйте вартість послуг онлайн",
+                calcDesc: "Оберіть необхідні опції та дізнайтеся приблизну ціну за кілька секунд.",
+                calcSelectService: "Оберіть послугу:",
+                calcQuantity: "Кількість (точок / вікон / послуг):",
+                calcOptions: "Додаткові опції:",
+                optUrgentText: "Терміновий виїзд (+€30)",
+                optMaterialsText: "З закупівлею та доставкою матеріалів (+€50)",
+                totalEst: "Орієнтовна вартість:",
+                bookBtn: "Замовити розрахунок",
+                contactTitle: "Зв'яжіться з нами",
+                contactDesc: "Ми готові відповісти на ваші запитання та прийняти замовлення.",
+                phoneLabel: "Телефон",
+                emailLabel: "Електронна пошта",
+                addrLabel: "Адреса офісу",
+                addrValue: "вул. Центральна, 12, Київ, Україна",
+                formHeader: "Напишіть нам повідомлення",
+                cMsgLabel: "Повідомлення",
+                cSubmitBtn: "Надіслати повідомлення",
+                copyright: "© 2026 MasterFix Pro. Усі права захищені."
+            },
+            en: {
+                brandSub: "Pro Services",
+                navHome: "Home",
+                navServices: "Services",
+                navAbout: "About Us",
+                navGallery: "Gallery",
+                navPricing: "Pricing",
+                navFaq: "FAQ",
+                navReviews: "Reviews",
+                navCalc: "Calculator",
+                navContact: "Contact",
+                heroBadge: "High quality work & guarantee",
+                heroTitle: "Professional renovation & installation for your home",
+                heroSubtitle: "Comprehensive electrical, window installation, repair, painting, and wooden element restoration services by certified experts.",
+                heroBtnCalc: "Calculate Cost",
+                heroBtnServices: "Our Services",
+                heroFormTitle: "Quick Inquiry",
+                heroFormSub: "Leave your contacts and we will call you back within 15 minutes.",
+                phName: "Your name",
+                phPhone: "Phone number",
+                heroFormBtn: "Request Call",
+                servSectionTag: "Our Work",
+                servSectionTitle: "Key Services",
+                servSectionDesc: "We provide a full range of home improvement services with official quality guarantees.",
+                moreDetails: "Learn More",
+                s1Title: "Electrical work",
+                s1Desc: "Wiring installation, socket setup, switches, circuit breakers, and complete troubleshooting.",
+                s2Title: "Window installation",
+                s2Desc: "Professional installation of plastic and wooden windows with sealing and hardware adjustment.",
+                s3Title: "Window repair & wooden elements",
+                s3Desc: "Window restoration, wooden thresholds and handrails repair, coating restoration.",
+                s4Title: "Window painting",
+                s4Desc: "High-quality window exterior renewal using special weather-resistant paints.",
+                servFullTitle: "Full Catalog of Services",
+                servFullDesc: "Detailed description of each professional service we provide.",
+                s1Tag: "Category 01",
+                s1LongDesc: "Professional electrical wiring installation and replacement in apartments, houses, and commercial premises. Setting up sockets, switches, lighting, and circuit breaker boards.",
+                s1_l1: "Fault diagnostics",
+                s1_l2: "Cable & conduit installation",
+                s1_l3: "Home appliance connection",
+                s1_l4: "Emergency master dispatch",
+                s2Tag: "Category 02",
+                s2LongDesc: "High-quality installation of modern plastic, aluminum, and wooden window systems. Strict compliance with thermal insulation and sealing standards.",
+                s2_l1: "Old window dismantling",
+                s2_l2: "Sill & windowsill installation",
+                s2_l3: "Foam sealing",
+                s2_l4: "Final hardware adjustment",
+                s3Tag: "Category 03",
+                s3LongDesc: "Eliminating drafts, replacing double-glazed units, adjusting hardware. Professional repair of interior wooden elements: thresholds, handrails, steps.",
+                s3_l1: "Seal replacement",
+                s3_l2: "Wooden threshold restoration",
+                s3_l3: "Handrail repair & reinforcement",
+                s3_l4: "Broken glass unit replacement",
+                s4Tag: "Category 04",
+                s4LongDesc: "Renovation and painting of PVC, aluminum, and wooden window frames using eco-friendly weather-resistant paints.",
+                s4_l1: "Preparation & sanding",
+                s4_l2: "Priming & protection",
+                s4_l3: "Painting in any RAL colors",
+                s4_l4: "Smooth streak-free finish",
+                aboutTitle: "A Team of Professionals with Years of Experience",
+                aboutDesc1: "MasterFix Pro unites top-tier craftsmen. We work exclusively with professional tools and proven materials.",
+                aboutDesc2: "Our goal is to provide clients with flawless service, transparent prices, and long-term warranties.",
+                stat1: "Years Experience",
+                stat2: "Orders Completed",
+                stat3: "Guarantee",
+                galTitle: "Our Work Gallery",
+                galDesc: "Explore completed projects in electrical work, window installation, and restoration.",
+                g1Title: "Modern Electrical Panel Assembly",
+                g1Desc: "Circuit breaker setup in a new apartment.",
+                g2Title: "Energy-Saving Window Installation",
+                g2Desc: "Comprehensive setup in a private cottage.",
+                g3Title: "Wooden Threshold & Handrail Restoration",
+                g3Desc: "Restoring original look and varnishing.",
+                g4Title: "Frame Painting in RAL 7016",
+                g4Desc: "Adding modern style to an old facade.",
+                g5Title: "Hidden Socket Installation",
+                g5Desc: "Installing socket blocks in the kitchen work area.",
+                g6Title: "Window Maintenance Service",
+                g6Desc: "Seal replacement and pressure adjustment.",
+                priceTitle: "Transparent & Affordable Prices",
+                priceDesc: "Estimated cost of basic services.",
+                p1Sub: "Installation & connection",
+                p2Sub: "Mounting & sealing",
+                p3Sub: "Restoration & adjustment",
+                p4Sub: "Frame coating renewal",
+                perService: "/ service",
+                perWindow: "/ window",
+                p1_1: "Socket / switch installation",
+                p1_2: "Circuit breaker mounting",
+                p1_3: "Chandelier connection",
+                p2_1: "Old window dismantling",
+                p2_2: "New window installation",
+                p2_3: "Windowsill installation",
+                p3_1: "Hardware adjustment",
+                p3_2: "Wooden threshold repair",
+                p3_3: "Handrail restoration",
+                p4_1: "Prep & sanding",
+                p4_2: "Surface priming",
+                p4_3: "Two-layer painting",
+                orderBtn: "Order Now",
+                faqTitle: "Frequently Asked Questions",
+                faqDesc: "Find answers to the most common questions about our services.",
+                q1: "What guarantee is provided for completed work?",
+                a1: "We provide an official guarantee of 12 to 36 months for all electrical, installation, and window repair services.",
+                q2: "Is emergency master dispatch possible on the same day?",
+                a2: "Yes, we offer emergency dispatch within 1-2 hours around the city.",
+                q3: "How does payment work?",
+                a3: "Payment is made after completion of work and quality inspection by the customer.",
+                q4: "Do you repair wooden thresholds and handrails?",
+                a4: "Yes, this is one of our specializations. We restore damaged wooden thresholds, strengthen and paint handrails.",
+                revTitle: "What Our Clients Say",
+                revDesc: "Real reviews from satisfied customers.",
+                rev1Text: "Very grateful for quick window installation and adjustment. Craftsmen arrived on time and did everything cleanly.",
+                rev1Date: "2 weeks ago",
+                rev2Text: "Ordered electrical services for the whole apartment. Everything done to standards, safety is top-tier!",
+                rev2Date: "1 month ago",
+                rev3Text: "Restored wooden handrails and terrace thresholds, and painted window frames. Looks like new!",
+                rev3Date: "3 weeks ago",
+                calcTitle: "Calculate Service Cost Online",
+                calcDesc: "Select necessary options and get an approximate price in seconds.",
+                calcSelectService: "Select Service:",
+                calcQuantity: "Quantity (points / windows / services):",
+                calcOptions: "Additional Options:",
+                optUrgentText: "Urgent dispatch (+€30)",
+                optMaterialsText: "With material procurement & delivery (+€50)",
+                totalEst: "Estimated Cost:",
+                bookBtn: "Book Estimate",
+                contactTitle: "Contact Us",
+                contactDesc: "We are ready to answer your questions and take your orders.",
+                phoneLabel: "Phone",
+                emailLabel: "Email",
+                addrLabel: "Office Address",
+                addrValue: "Central St., 12, Kyiv, Ukraine",
+                formHeader: "Send Us a Message",
+                cMsgLabel: "Message",
+                cSubmitBtn: "Send Message",
+                copyright: "© 2026 MasterFix Pro. All rights reserved."
+            },
+            ru: {
+                brandSub: "Профессиональные услуги",
+                navHome: "Главная",
+                navServices: "Услуги",
+                navAbout: "О нас",
+                navGallery: "Галерея",
+                navPricing: "Цены",
+                navFaq: "FAQ",
+                navReviews: "Отзывы",
+                navCalc: "Калькулятор",
+                navContact: "Контакты",
+                heroBadge: "Высокое качество работ и гарантия",
+                heroTitle: "Профессиональный ремонт и установка для вашего дома",
+                heroSubtitle: "Комплексные услуги электрика, установка, ремонт и покраска окон, а также восстановление деревянных элементов от квалифицированных мастеров.",
+                heroBtnCalc: "Рассчитать стоимость",
+                heroBtnServices: "Наши услуги",
+                heroFormTitle: "Быстрая заявка",
+                heroFormSub: "Оставьте контакты, и мы перезвоним вам в течение 15 минут.",
+                phName: "Ваше имя",
+                phPhone: "Номер телефона",
+                heroFormBtn: "Заказать звонок",
+                servSectionTag: "Направления работы",
+                servSectionTitle: "Наши ключевые услуги",
+                servSectionDesc: "Мы выполняем полный спектр работ по дому с официальной гарантией качества.",
+                moreDetails: "Подробнее",
+                s1Title: "Электрика",
+                s1Desc: "Монтаж проводки, установка розеток, выключателей, автоматов и полное устранение неисправностей.",
+                s2Title: "Установка окон",
+                s2Desc: "Профессиональный монтаж пластиковых и деревянных окон с герметизацией и регулировкой фурнитуры.",
+                s3Title: "Ремонт окон и деревянных элементов",
+                s3Desc: "Восстановление оконных систем, ремонт порогов и поручней из дерева, реставрация покрытия.",
+                s4Title: "Покраска окон",
+                s4Desc: "Качественное обновление внешнего вида окон специальными атмосферостойкими красками.",
+                servFullTitle: "Полный каталог наших услуг",
+                servFullDesc: "Детальное описание каждого направления работ, выполняемых профессионально.",
+                s1Tag: "Категория 01",
+                s1LongDesc: "Профессиональный монтаж и замена электропроводки в квартирах, домах и коммерческих помещениях. Установка розеток, выключателей, освещения и сборка щитков.",
+                s1_l1: "Диагностика неисправностей",
+                s1_l2: "Монтаж кабеля и каналов",
+                s1_l3: "Подключение приборов",
+                s1_l4: "Аварийный выезд мастера",
+                s2Tag: "Категория 02",
+                s2LongDesc: "Качественный монтаж современных оконных конструкций. Соблюдение технологий теплоизоляции и герметизации монтажных швов.",
+                s2_l1: "Демонтаж старых окон",
+                s2_l2: "Установка подоконников",
+                s2_l3: "Герметизация пеной",
+                s2_l4: "Регулировка фурнитуры",
+                s3Tag: "Категория 03",
+                s3LongDesc: "Устранение продуваний, замена стеклопакетов, регулировка фурнитуры. Профессиональный ремонт деревянных элементов: порогов, поручней, ступеней.",
+                s3_l1: "Замена уплотнителей",
+                s3_l2: "Реставрация порогов",
+                s3_l3: "Ремонт и укрепление поручней",
+                s3_l4: "Замена стеклопакетов",
+                s4Tag: "Категория 04",
+                s4LongDesc: "Обновление и покраска оконных рам из ПВХ, алюминия и дерева экологичными красками, стойкими к ультрафиолету.",
+                s4_l1: "Подготовка и шлифовка",
+                s4_l2: "Грунтование и защита",
+                s4_l3: "Покраска в цвета RAL",
+                s4_l4: "Ровное покрытие без потеков",
+                aboutTitle: "Команда профессионалов с многолетним опытом",
+                aboutDesc1: "Компания MasterFix Pro объединяет высококлассных мастеров. Работаем исключительно с профессиональным инструментом.",
+                aboutDesc2: "Наша цель — предоставить клиентам безупречный сервис, прозрачные цены и длительную гарантию.",
+                stat1: "Лет опыта",
+                stat2: "Заказов",
+                stat3: "Гарантия",
+                galTitle: "Примеры наших работ",
+                galDesc: "Ознакомьтесь с реализованными проектами.",
+                g1Title: "Сборка современного электрощита",
+                g1Desc: "Монтаж автоматов защиты в новостройке.",
+                g2Title: "Монтаж энергосберегающих окон",
+                g2Desc: "Комплексная установка в коттедже.",
+                g3Title: "Реставрация деревянного порога",
+                g3Desc: "Восстановление первоначального вида.",
+                g4Title: "Покраска рам в цвет RAL 7016",
+                g4Desc: "Придание стильного вида фасадной части.",
+                g5Title: "Монтаж скрытых розеток",
+                g5Desc: "Установка блоков на кухне.",
+                g6Title: "Сервисное обслуживание окон",
+                g6Desc: "Замена уплотнителей и регулировка.",
+                priceTitle: "Прозрачные и доступные цены",
+                priceDesc: "Ориентировочная стоимость базовых услуг.",
+                p1Sub: "Монтаж и подключение",
+                p2Sub: "Монтаж и герметизация",
+                p3Sub: "Реставрация и регулировка",
+                p4Sub: "Обновление покрытия рам",
+                perService: "/ услуга",
+                perWindow: "/ окно",
+                p1_1: "Установка розетки / выключателя",
+                p1_2: "Монтаж автомата в щиток",
+                p1_3: "Подключение люстры",
+                p2_1: "Демонтаж старого окна",
+                p2_2: "Установка нового окна",
+                p2_3: "Монтаж подоконника",
+                p3_1: "Регулировка фурнитуры",
+                p3_2: "Ремонт деревянного порога",
+                p3_3: "Восстановление поручней",
+                p4_1: "Подготовка и шлифовка",
+                p4_2: "Грунтование поверхности",
+                p4_3: "Покраска в два слоя",
+                orderBtn: "Заказать",
+                faqTitle: "Частые вопросы и ответы",
+                faqDesc: "Найдите ответы на самые распространенные вопросы.",
+                q1: "Какая гарантия предоставляется на работы?",
+                a1: "Мы предоставляем официальную гарантию сроком от 12 до 36 месяцев.",
+                q2: "Возможен ли срочный выезд мастера в день заказа?",
+                a2: "Да, у нас есть услуга аварийного выезда в течение 1-2 часов.",
+                q3: "Как происходит оплата за услуги?",
+                a3: "Оплата осуществляется после завершения работ и проверки качества.",
+                q4: "Делаете ли вы ремонт деревянных порогов и поручней?",
+                a4: "Да, это одна из наших специализаций.",
+                revTitle: "Что говорят наши клиенты",
+                revDesc: "Реальные отзывы довольных заказчиков.",
+                rev1Text: "Очень благодарен за быструю установку окон и регулировку. Мастера пришли вовремя.",
+                rev1Date: "2 недели назад",
+                rev2Text: "Заказывал услуги электрика для всей квартиры. Все сделано по стандартам!",
+                rev2Date: "Месяц назад",
+                rev3Text: "Отреставрировали деревянные поручни и пороги на террасе, а также покрасили рамы.",
+                rev3Date: "3 недели назад",
+                calcTitle: "Рассчитайте стоимость услуг онлайн",
+                calcDesc: "Выберите необходимые опции и узнайте примерную цену.",
+                calcSelectService: "Выберите услугу:",
+                calcQuantity: "Количество (точек / окон / услуг):",
+                calcOptions: "Дополнительные опции:",
+                optUrgentText: "Срочный выезд (+€30)",
+                optMaterialsText: "С закупкой и доставкой материалов (+€50)",
+                totalEst: "Ориентировочная стоимость:",
+                bookBtn: "Заказать расчет",
+                contactTitle: "Свяжитесь с нами",
+                contactDesc: "Мы готовы ответить на ваши вопросы и принять заказ.",
+                phoneLabel: "Телефон",
+                emailLabel: "Электронная почта",
+                addrLabel: "Адрес офиса",
+                addrValue: "ул. Центральная, 12, Киев, Украина",
+                formHeader: "Напишите нам сообщение",
+                cMsgLabel: "Сообщение",
+                cSubmitBtn: "Отправить сообщение",
+                copyright: "© 2026 MasterFix Pro. Все права защищены."
+            },
+            de: {
+                brandSub: "Profi-Dienstleistungen",
+                navHome: "Startseite",
+                navServices: "Dienstleistungen",
+                navAbout: "Über uns",
+                navGallery: "Galerie",
+                navPricing: "Preise",
+                navFaq: "FAQ",
+                navReviews: "Bewertungen",
+                navCalc: "Rechner",
+                navContact: "Kontakt",
+                heroBadge: "Hohe Qualität & Garantie",
+                heroTitle: "Professionelle Renovierung & Installation für Ihr Zuhause",
+                heroSubtitle: "Umfassende Elektroarbeiten, Fenstereinbau, Reparatur, Bemalung und Restauration von Holzelementen durch zertifizierte Experten.",
+                heroBtnCalc: "Kosten berechnen",
+                heroBtnServices: "Unsere Leistungen",
+                heroFormTitle: "Schnell-Anfrage",
+                heroFormSub: "Hinterlassen Sie Ihre Kontaktdaten, wir rufen Sie in 15 Minuten zurück.",
+                phName: "Ihr Name",
+                phPhone: "Telefonnummer",
+                heroFormBtn: "Rückruf anfordern",
+                servSectionTag: "Arbeitsbereiche",
+                servSectionTitle: "Unsere Hauptleistungen",
+                servSectionDesc: "Wir bieten ein breites Spektrum an handwerklichen Dienstleistungen mit offizieller Qualitätsgarantie.",
+                moreDetails: "Mehr erfahren",
+                s1Title: "Elektrik",
+                s1Desc: "Verdrahtung, Steckdosen, Schalter, Sicherungsautomaten und professionelle Fehlersuche.",
+                s2Title: "Fenstereinbau",
+                s2Desc: "Professioneller Einbau von Kunststoff- und Holzfenstern mit Abdichtung und Beschlageinstellung.",
+                s3Title: "Fensterreparatur & Holzelemente",
+                s3Desc: "Fensterinstandsetzung, Reparatur von Holzschwellen und Handläufen, Oberflächenrestaurierung.",
+                s4Title: "Fensterbemalung",
+                s4Desc: "Hochwertige Erneuerung von Fensterrahmen mit speziellen witterungsbeständigen Farben.",
+                servFullTitle: "Vollständiger Katalog unserer Leistungen",
+                servFullDesc: "Detaillierte Beschreibung aller professionellen Arbeiten.",
+                s1Tag: "Kategorie 01",
+                s1LongDesc: "Professionelle Elektroinstallation und Erneuerung in Wohnungen und Gewerberäumen. Montage von Steckdosen, Schaltern, Beleuchtung und Verteilerkästen.",
+                s1_l1: "Fehlerdiagnose",
+                s1_l2: "Kabel- und Kanalmontage",
+                s1_l3: "Haushaltsgeräteanschluss",
+                s1_l4: "Notfalleinsatz",
+                s2Tag: "Kategorie 02",
+                s2LongDesc: "Qual hochwertiger Einbau moderner Fenster. Einhaltung von Wärmeisolierungs- und Abdichtungsstandards.",
+                s2_l1: "Demontage alter Fenster",
+                s2_l2: "Fensterbankmontage",
+                s2_l3: "Schaumabdichtung",
+                s2_l4: "Beschlageinstellung",
+                s3Tag: "Kategorie 03",
+                s3LongDesc: "Beseitigung von Zugluft, Austausch von Isolierverglasungen. Professionelle Reparatur von Holz-Innenelementen: Schwellen, Handläufe, Stufen.",
+                s3_l1: "Dichtungsaustausch",
+                s3_l2: "Holzschwellenrestaurierung",
+                s3_l3: "Handlaufreparatur",
+                s3_l4: "Glasaustausch",
+                s4Tag: "Kategorie 04",
+                s4LongDesc: "Erneuerung und Lackierung von PVC-, Aluminium- und Holzfensterrahmen mit umweltfreundlichen Farben.",
+                s4_l1: "Vorbereitung & Schleifen",
+                s4_l2: "Grundierung & Schutz",
+                s4_l3: "Lackierung in RAL-Farben",
+                s4_l4: "Gleichmäßige Lackierung",
+                aboutTitle: "Ein Team von Profis mit langjähriger Erfahrung",
+                aboutDesc1: "MasterFix Pro vereint erstklassige Handwerker. Wir arbeiten ausschließlich mit professionellem Werkzeug.",
+                aboutDesc2: "Unser Ziel ist es, tadellosen Service, transparente Preise und langfristige Garantien zu bieten.",
+                stat1: "Jahre Erfahrung",
+                stat2: "Aufträge",
+                stat3: "Garantie",
+                galTitle: "Unsere Arbeitsgalerie",
+                galDesc: "Entdecken Sie unsere realisierten Projekte.",
+                g1Title: "Moderner Verteilerkasten",
+                g1Desc: "Sicherungsautomat-Montage im Neubau.",
+                g2Title: "Energieeffizienter Fenstereinbau",
+                g2Desc: "Kompletteinbau im Privathaus.",
+                g3Title: "Holzschwellen- & Handlaufrestaurierung",
+                g3Desc: "Wiederherstellung des Originalzustands.",
+                g4Title: "Rahmenbemalung in RAL 7016",
+                g4Desc: "Modernisierung der Fassadenoptik.",
+                g5Title: "Versteckte Steckdosen",
+                g5Desc: "Montage von Steckdosenblöcken in der Küche.",
+                g6Title: "Fensterwartung",
+                g6Desc: "Dichtungsaustausch und Justierung.",
+                priceTitle: "Transparente und günstige Preise",
+                priceDesc: "Geschätzte Kosten für Basisleistungen.",
+                p1Sub: "Montage & Anschluss",
+                p2Sub: "Einbau & Abdichtung",
+                p3Sub: "Restauration & Justierung",
+                p4Sub: "Rahmenbeschichtung",
+                perService: "/ Service",
+                perWindow: "/ Fenster",
+                p1_1: "Steckdosen-/Schalterinstallation",
+                p1_2: "Sicherungsautomat-Montage",
+                p1_3: "Leuchtenanschluss",
+                p2_1: "Altfensterdemontage",
+                p2_2: "Neufenstereinbau",
+                p2_3: "Fensterbankmontage",
+                p3_1: "Beschlageinstellung",
+                p3_2: "Holzschwellenreparatur",
+                p3_3: "Handlaufrestaurierung",
+                p4_1: "Vorbereitung & Schleifen",
+                p4_2: "Grundierung",
+                p4_3: "Zweischicht-Lackierung",
+                orderBtn: "Bestellen",
+                faqTitle: "Häufig gestellte Fragen",
+                faqDesc: "Finden Sie Antworten auf häufige Fragen.",
+                q1: "Welche Garantie wird gewährt?",
+                a1: "Wir gewähren eine offizielle Garantie von 12 bis 36 Monaten.",
+                q2: "Ist ein Notfalleinsatz am selben Tag möglich?",
+                a2: "Ja, wir bieten einen Notfalleinsatz innerhalb von 1-2 Stunden in der Stadt.",
+                q3: "Wie funktioniert die Bezahlung?",
+                a3: "Die Bezahlung erfolgt nach Abschluss der Arbeiten und Qualitätsprüfung.",
+                q4: "Reparieren Sie Holzschwellen und Handläufe?",
+                a4: "Ja, dies ist eine unserer Spezialisierungen.",
+                revTitle: "Was unsere Kunden sagen",
+                revDesc: "Echte Bewertungen von zufriedenen Kunden.",
+                rev1Text: "Sehr dankbar für den schnellen Fenstereinbau. Die Handwerker waren pünktlich.",
+                rev1Date: "Vor 2 Wochen",
+                rev2Text: "Elektrikerdienste für die ganze Wohnung bestellt. Alles nach Norm!",
+                rev2Date: "Vor 1 Monat",
+                rev3Text: "Holzhandläufe und Schwellen restauriert sowie Fensterrahmen gestrichen. Wie neu!",
+                rev3Date: "Vor 3 Wochen",
+                calcTitle: "Dienstleistungskosten online berechnen",
+                calcDesc: "Wählen Sie Optionen und ermitteln Sie den Preis in Sekunden.",
+                calcSelectService: "Leistung wählen:",
+                calcQuantity: "Menge (Punkte / Fenster / Services):",
+                calcOptions: "Zusatzoptionen:",
+                optUrgentText: "Notfalleinsatz (+€30)",
+                optMaterialsText: "Inkl. Materialbeschaffung & Lieferung (+€50)",
+                totalEst: "Geschätzte Kosten:",
+                bookBtn: "Kostenvoranschlag anfordern",
+                contactTitle: "Kontaktieren Sie uns",
+                contactDesc: "Wir sind bereit, Ihre Fragen zu beantworten.",
+                phoneLabel: "Telefon",
+                emailLabel: "E-Mail",
+                addrLabel: "Büroadresse",
+                addrValue: "Zentralstr. 12, Kiew, Ukraine",
+                formHeader: "Senden Sie uns eine Nachricht",
+                cMsgLabel: "Nachricht",
+                cSubmitBtn: "Nachricht senden",
+                copyright: "© 2026 MasterFix Pro. Alle Rechte vorbehalten."
+            },
+            pl: {
+                brandSub: "Usługi Profesjonalne",
+                navHome: "Strona główna",
+                navServices: "Usługi",
+                navAbout: "O nas",
+                navGallery: "Galeria",
+                navPricing: "Cennik",
+                navFaq: "FAQ",
+                navReviews: "Opinie",
+                navCalc: "Kalkulator",
+                navContact: "Kontakt",
+                heroBadge: "Wysoka jakość i gwarancja",
+                heroTitle: "Profesjonalny remont i montaż dla Twojego domu",
+                heroSubtitle: "Kompleksowe usługi elektryczne, montaż okien, naprawa, malowanie oraz renowacja elementów drewnianych przez certyfikowanych fachowców.",
+                heroBtnCalc: "Oblicz koszt",
+                heroBtnServices: "Nasze usługi",
+                heroFormTitle: "Szybkie zapytanie",
+                heroFormSub: "Zostaw kontakt, oddzwonimy w ciągu 15 minut.",
+                phName: "Twoje imię",
+                phPhone: "Numer telefonu",
+                heroFormBtn: "Zamów połączenie",
+                servSectionTag: "Zakres prac",
+                servSectionTitle: "Nasze główne usługi",
+                servSectionDesc: "Świadczymy pełen zakres usług domowych z oficjalną gwarancją jakości.",
+                moreDetails: "Więcej szczegółów",
+                s1Title: "Elektryka",
+                s1Desc: "Instalacje elektryczne, montaż gniazd, włączników, bezpieczników oraz usuwanie usterek.",
+                s2Title: "Montaż okien",
+                s2Desc: "Profesjonalny montaż okien plastikowych i drewnianych z uszczelnieniem i regulacją okucia.",
+                s3Title: "Naprawa okien i elementów drewnianych",
+                s3Desc: "Renovacja systemów okiennych, naprawa progów i poręczy drewnianych, odnowienie powłok.",
+                s4Title: "Malowanie okien",
+                s4Desc: "Wysokiej jakości odświeżanie wyglądu okien specjalnymi farbami odpornymi na warunki atmosferyczne.",
+                servFullTitle: "Pełny katalog naszych usług",
+                servFullDesc: "Szczegółowy opis każdego rodzaju profesjonalnych prac.",
+                s1Tag: "Kategoria 01",
+                s1LongDesc: "Profesjonalny montaż i wymiana instalacji elektrycznej w mieszkaniach i domach. Montaż gniazd, wyłączników, oświetlenia oraz skrzynek bezpiecznikowych.",
+                s1_l1: "Diagnostyka usterek",
+                s1_l2: "Montaż kabli i korytek",
+                s1_l3: "Podłączenie AGD",
+                s1_l4: "Awaryjny wyjazd fachowca",
+                s2Tag: "Kategoria 02",
+                s2LongDesc: "Wysokiej jakości montaż nowoczesnych okien. Przestrzeganie standardów izolacji termicznej i uszczelniania.",
+                s2_l1: "Demontaż staryх okien",
+                s2_l2: "Montaż parapetów",
+                s2_l3: "Uszczelnienie pianką",
+                s2_l4: "Regulacja okuć",
+                s3Tag: "Kategoria 03",
+                s3LongDesc: "Usuwanie przewiewów, wymiana szyb, regulacja okuć. Profesjonalna naprawa drewnianych elementów: progów, poręczy, stopni.",
+                s3_l1: "Wymiana uszczelek",
+                s3_l2: "Renowacja progów drewnianych",
+                s3_l3: "Naprawa i wzmocnienie poręczy",
+                s3_l4: "Wymiana pakietów szybowych",
+                s4Tag: "Kategoria 04",
+                s4LongDesc: "Odnowienie i malowanie ram okiennych PCV, aluminium i drewna ekologicznymi farbami odpornymi na promienie UV.",
+                s4_l1: "Przygotowanie i szlifowanie",
+                s4_l2: "Gruntowanie i ochrona",
+                s4_l3: "Malowanie w kolorach RAL",
+                s4_l4: "Równa powłoka bez zacieków",
+                aboutTitle: "Zespół profesjonalistów z wieloletnim doświadczeniem",
+                aboutDesc1: "MasterFix Pro zrzesza najwyższej klasy fachowców. Pracujemy wyłącznie z profesjonalnymi narzędziami.",
+                aboutDesc2: "Naszym celem jest zapewnienie klientom nienagannej obsługi, przejrzystych cen i długoterminowej gwarancji.",
+                stat1: "Lat doświadczenia",
+                stat2: "Zrealizowanych zleceń",
+                stat3: "Gwarancja",
+                galTitle: "Galeria naszych prac",
+                galDesc: "Zapoznaj się z zrealizowanymi projektami w zakresie elektryki, montażu i renowacji.",
+                g1Title: "Montaż rozdzielnicy elektrycznej",
+                g1Desc: "Instalacja bezpieczników w nowym mieszkaniu.",
+                g2Title: "Montaż okien energooszczędnych",
+                g2Desc: "Kompleksowa instalacja w domku jednorodzinnym.",
+                g3Title: "Renowacja progu i poręczy drewnianych",
+                g3Desc: "Przywrócenie pierwotnego wyglądu i lakierowanie.",
+                g4Title: "Malowanie ram w kolorze RAL 7016",
+                g4Desc: "Nadanie nowoczesnego stylu starej fasadzie.",
+                g5Title: "Montaż ukrytych gniazd",
+                g5Desc: "Instalacja bloków gniazd w strefie roboczej kuchni.",
+                g6Title: "Serwis i konserwacja okien",
+                g6Desc: "Wymiana uszczelek i regulacja docisku.",
+                priceTitle: "Przejrzyste i przystępne ceny",
+                priceDesc: "Szacunkowy koszt podstawowych usług.",
+                p1Sub: "Montaż i podłączenie",
+                p2Sub: "Montaż i uszczelnienie",
+                p3Sub: "Renowacja i regulacja",
+                p4Sub: "Odnowienie powłoki ram",
+                perService: "/ usługa",
+                perWindow: "/ okno",
+                p1_1: "Montaż gniazda / włącznika",
+                p1_2: "Montaż bezpiecznika",
+                p1_3: "Podłączenie żyrandola",
+                p2_1: "Demontaż starego okna",
+                p2_2: "Montaż nowego okna",
+                p2_3: "Montaż parapetu",
+                p3_1: "Regulacja okuć",
+                p3_2: "Naprawa progu drewnianego",
+                p3_3: "Renowacja poręczy",
+                p4_1: "Przygotowanie i szlifowanie",
+                p4_2: "Gruntowanie powierzchni",
+                p4_3: "Malowanie dwuwarstwowe",
+                orderBtn: "Zamów",
+                faqTitle: "Często zadawane pytania",
+                faqDesc: "Znajdź odpowiedzi na najczęstsze pytania.",
+                q1: "Jaka gwarancja jest udzielana na wykonane prace?",
+                a1: "Udzielamy oficjalnej gwarancji na okres od 12 do 36 miesięcy na wszelkie prace elektryczne i montażowe.",
+                q2: "Czy możliwy jest pilny wyjazd fachowca w dniu zamówienia?",
+                a2: "Tak, oferujemy awaryjny wyjazd w ciągu 1-2 godzin na terenie miasta.",
+                q3: "Jak odbywa się płatność za usługi?",
+                a3: "Płatność następuje po zakończeniu prac i weryfikacji jakości przez klienta.",
+                q4: "Czy naprawiate drewniane progi i poręcze?",
+                a4: "Tak, to jedna z naszych specjalizacji.",
+                revTitle: "Co mówią nasi klienci",
+                revDesc: "Prawdziwe opinie zadowolonych klientów.",
+                rev1Text: "Bardzo dziękuję za szybki montaż okien i regulację. Fachowci przyszli na czas.",
+                rev1Date: "2 tygodnie temu",
+                rev2Text: "Zamawiałem usługi elektryka do całego mieszkania. Wszystko zrobione zgodnie ze sztuką!",
+                rev2Date: "Miesiąc temu",
+                rev3Text: "Odrestaurowano drewniane poręcze i progi na tarasie oraz pomalowano ramy. Wygląda jak nowe!",
+                rev3Date: "3 tygodnie temu",
+                calcTitle: "Oblicz koszt usług online",
+                calcDesc: "Wybierz niezbędne opcje i poznaj orientacyjną cenę w kilka sekund.",
+                calcSelectService: "Wybierz usługę:",
+                calcQuantity: "Ilość (punktów / okien / usług):",
+                calcOptions: "Opcje dodatkowe:",
+                optUrgentText: "Pilny wyjazd (+€30)",
+                optMaterialsText: "Z zakupem i dostawą materiałów (+€50)",
+                totalEst: "Szacunkowy koszt:",
+                bookBtn: "Zamów wycenę",
+                contactTitle: "Skontaktuj się z nami",
+                contactDesc: "Jesteśmy gotowi odpowiedzieć na Twoje pytania i przyjąć zamówienia.",
+                phoneLabel: "Telefon",
+                emailLabel: "E-mail",
+                addrLabel: "Adres biura",
+                addrValue: "ul. Centralna 12, Kijów, Ukraina",
+                formHeader: "Napisz do nas wiadomość",
+                cMsgLabel: "Wiadomość",
+                cSubmitBtn: "Wyślij wiadomość",
+                copyright: "© 2026 MasterFix Pro. Wszelkie prawa zastrzeżone."
+            }
+        };
+
+        let currentLang = 'uk';
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Highlight active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-600', 'bg-brand-50');
+                if (btn.getAttribute('data-nav') === pageId) {
+                    btn.classList.add('text-brand-600', 'bg-brand-50');
+                }
+            });
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('langSelect').value = lang;
+            
+            // Translate elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Translate placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            showToast(lang === 'uk' ? 'Мову змінено на українську' : 'Language updated successfully');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function handleQuickLead(e) {
+            e.preventDefault();
+            const name = document.getElementById('qlName').value;
+            showToast(currentLang === 'uk' ? `Дякуємо, ${name}! Заявку прийнято.` : `Thank you, ${name}! Request received.`);
+            e.target.reset();
+        }
+
+        function handleContactForm(e) {
+            e.preventDefault();
+            showToast(currentLang === 'uk' ? 'Повідомлення успішно надіслано!' : 'Message sent successfully!');
+            e.target.reset();
+        }
+
+        function calculateTotal() {
+            const basePrice = parseFloat(document.getElementById('calcService').value) || 0;
+            const qty = parseInt(document.getElementById('calcQty').value) || 1;
+            let total = basePrice * qty;
+
+            if (document.getElementById('optUrgent').checked) {
+                total += 30;
+            }
+            if (document.getElementById('optMaterials').checked) {
+                total += 50;
+            }
+
+            document.getElementById('totalPrice').textContent = '€' + total;
+        }
+
+        function submitBooking() {
+            const total = document.getElementById('totalPrice').textContent;
+            showToast(currentLang === 'uk' ? `Розрахунок на суму ${total} успішно збережено! Ми зв'яжемося з вами.` : `Estimate of ${total} saved successfully! We will contact you.`);
+        }
+
+        // Initialize calculator on load
+        window.onload = function() {
+            calculateTotal();
+        };
+    </script>
+</body>
+</html>
