@@ -32,10 +32,7 @@
       }
       a { color: inherit; text-decoration: none; }
       img { max-width: 100%; display: block; }
-      .container {
-        width: min(1120px, calc(100% - 32px));
-        margin: 0 auto;
-      }
+      .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
       header {
         position: sticky;
         top: 0;
@@ -77,6 +74,29 @@
         font-size: 0.95rem;
       }
       nav a:hover { color: var(--brand); }
+      .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #f1f5f9;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px;
+      }
+      .lang-btn {
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .lang-btn.active {
+        background: white;
+        color: var(--brand);
+        box-shadow: 0 2px 10px rgba(37,99,235,0.08);
+      }
       .cta {
         display: inline-block;
         padding: 14px 24px;
@@ -150,10 +170,7 @@
         backdrop-filter: blur(6px);
         box-shadow: var(--shadow);
       }
-      .card-form h3 {
-        margin: 0 0 18px;
-        font-size: 1.8rem;
-      }
+      .card-form h3 { margin: 0 0 18px; font-size: 1.8rem; }
       .field {
         display: block;
         width: 100%;
@@ -183,10 +200,7 @@
         font-size: clamp(2rem, 3vw, 3rem);
         margin: 12px 0 10px;
       }
-      .section-header p {
-        color: var(--muted);
-        font-size: 1.05rem;
-      }
+      .section-header p { color: var(--muted); font-size: 1.05rem; }
       .grid-4 {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -210,14 +224,8 @@
         font-size: 1.3rem;
         margin-bottom: 18px;
       }
-      .feature h3 {
-        margin: 0 0 10px;
-        font-size: 1.25rem;
-      }
-      .feature p {
-        margin: 0;
-        color: var(--muted);
-      }
+      .feature h3 { margin: 0 0 10px; font-size: 1.25rem; }
+      .feature p { margin: 0; color: var(--muted); }
       .stats {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -321,11 +329,7 @@
         height: 46px;
         border-radius: 14px;
       }
-      .footer-tagline {
-        color: #cbd5e1;
-        max-width: 320px;
-        margin-top: 18px;
-      }
+      .footer-tagline { color: #cbd5e1; max-width: 320px; margin-top: 18px; }
       .footer-column h4 {
         margin: 0 0 16px;
         color: white;
@@ -341,9 +345,7 @@
         gap: 10px;
       }
       .footer-list li { margin: 0; }
-      .footer-list a, .footer-list span {
-        color: #cbd5e1;
-      }
+      .footer-list a, .footer-list span { color: #cbd5e1; }
       .footer-list a:hover { color: white; }
       .mini-cta {
         display: inline-flex;
@@ -375,9 +377,7 @@
         flex-wrap: wrap;
       }
       @media (max-width: 920px) {
-        .hero-grid, .grid-4, .pricing, .contact-wrap, .footer-grid {
-          grid-template-columns: 1fr;
-        }
+        .hero-grid, .grid-4, .pricing, .contact-wrap, .footer-grid { grid-template-columns: 1fr; }
         nav { display: none; }
         .stats { grid-template-columns: 1fr; }
       }
@@ -392,15 +392,22 @@
         </div>
 
         <nav>
-          <a href="#home">Home</a>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
+          <a href="#home" data-i18n="navHome">Home</a>
+          <a href="#services" data-i18n="navServices">Services</a>
+          <a href="#about" data-i18n="navAbout">About</a>
+          <a href="#pricing" data-i18n="navPricing">Pricing</a>
+          <a href="#faq" data-i18n="navFaq">FAQ</a>
+          <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
 
-        <a class="cta" href="#contact">Book a call</a>
+        <div class="lang-switch" aria-label="Language selector">
+          <button class="lang-btn active" data-lang="en" type="button">EN</button>
+          <button class="lang-btn" data-lang="es" type="button">ES</button>
+          <button class="lang-btn" data-lang="de" type="button">DE</button>
+          <button class="lang-btn" data-lang="ru" type="button">RU</button>
+        </div>
+
+        <a class="cta" href="#contact" data-i18n="ctaBook">Book a call</a>
       </div>
     </header>
 
@@ -408,23 +415,23 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <div class="eyebrow">High quality work & guarantee</div>
-            <h1>Glass, doors, and home upgrades done right.</h1>
-            <p class="lead">
+            <div class="eyebrow" data-i18n="eyebrow">High quality work & guarantee</div>
+            <h1 data-i18n="heroTitle">Glass, doors, and home upgrades done right.</h1>
+            <p class="lead" data-i18n="heroText">
               New York Window Setup provides precise installation, repair, glazing, and finishing services for homes and businesses with dependable craftsmanship.
             </p>
             <div class="hero-actions">
-              <a class="cta" href="#pricing">Calculate cost</a>
-              <a class="btn-light" href="#services">Our services</a>
+              <a class="cta" href="#pricing" data-i18n="heroCTA1">Calculate cost</a>
+              <a class="btn-light" href="#services" data-i18n="heroCTA2">Our services</a>
             </div>
           </div>
 
           <div class="card-form">
-            <h3>Quick request</h3>
+            <h3 data-i18n="quickRequest">Quick request</h3>
             <form>
-              <input class="field" type="text" placeholder="Your name" />
-              <input class="field" type="tel" placeholder="Phone number" />
-              <button class="cta" type="submit" style="width:100%;">Request a call</button>
+              <input class="field" type="text" data-i18n-placeholder="namePlaceholder" placeholder="Your name" />
+              <input class="field" type="tel" data-i18n-placeholder="phonePlaceholder" placeholder="Phone number" />
+              <button class="cta" type="submit" style="width:100%;" data-i18n="requestCall">Request a call</button>
             </form>
           </div>
         </div>
@@ -433,37 +440,37 @@
       <section id="services" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Our work</span>
-            <h2>Key services</h2>
-            <p>We deliver reliable home improvement services with transparent pricing and long-term quality.</p>
+            <span data-i18n="servicesTag">Our work</span>
+            <h2 data-i18n="servicesTitle">Key services</h2>
+            <p data-i18n="servicesText">We deliver reliable home improvement services with transparent pricing and long-term quality.</p>
           </div>
           <div class="grid-4">
             <article class="feature">
               <div class="icon">⚡</div>
-              <h3>Electrical work</h3>
-              <p>Wiring, outlets, switches, automation and troubleshooting.</p>
+              <h3 data-i18n="service1Title">Electrical work</h3>
+              <p data-i18n="service1Text">Wiring, outlets, switches, automation and troubleshooting.</p>
             </article>
             <article class="feature">
               <div class="icon">🪟</div>
-              <h3>Window installation</h3>
-              <p>Professional installation for plastic, aluminum and wooden windows.</p>
+              <h3 data-i18n="service2Title">Window installation</h3>
+              <p data-i18n="service2Text">Professional installation for plastic, aluminum and wooden windows.</p>
             </article>
             <article class="feature">
               <div class="icon">🛠️</div>
-              <h3>Window repair</h3>
-              <p>Frame, seal and hardware repair with precise finishing.</p>
+              <h3 data-i18n="service3Title">Window repair</h3>
+              <p data-i18n="service3Text">Frame, seal and hardware repair with precise finishing.</p>
             </article>
             <article class="feature">
               <div class="icon">🎨</div>
-              <h3>Window painting</h3>
-              <p>Refresh frames with durable finishes in any desired color.</p>
+              <h3 data-i18n="service4Title">Window painting</h3>
+              <p data-i18n="service4Text">Refresh frames with durable finishes in any desired color.</p>
             </article>
           </div>
 
           <div class="stats">
-            <div class="stat"><strong>10+</strong><span>Years of experience</span></div>
-            <div class="stat"><strong>3500+</strong><span>Jobs completed</span></div>
-            <div class="stat"><strong>100%</strong><span>Quality guarantee</span></div>
+            <div class="stat"><strong>10+</strong><span data-i18n="stat1">Years of experience</span></div>
+            <div class="stat"><strong>3500+</strong><span data-i18n="stat2">Jobs completed</span></div>
+            <div class="stat"><strong>100%</strong><span data-i18n="stat3">Quality guarantee</span></div>
           </div>
         </div>
       </section>
@@ -471,9 +478,9 @@
       <section id="about" class="section" style="background: white;">
         <div class="container">
           <div class="section-header">
-            <span>About us</span>
-            <h2>Team of professionals</h2>
-            <p>Our specialists combine craftsmanship, materials and careful attention to detail.</p>
+            <span data-i18n="aboutTag">About us</span>
+            <h2 data-i18n="aboutTitle">Team of professionals</h2>
+            <p data-i18n="aboutText">Our specialists combine craftsmanship, materials and careful attention to detail.</p>
           </div>
         </div>
       </section>
@@ -481,49 +488,49 @@
       <section id="pricing" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Pricing</span>
-            <h2>Transparent prices</h2>
-            <p>Estimated pricing for popular home improvement services.</p>
+            <span data-i18n="pricingTag">Pricing</span>
+            <h2 data-i18n="pricingTitle">Transparent prices</h2>
+            <p data-i18n="pricingText">Estimated pricing for popular home improvement services.</p>
           </div>
           <div class="pricing">
             <article class="price-card">
               <div class="icon">⚡</div>
-              <h3>Electrical</h3>
-              <div class="price">€25 <small>/ service</small></div>
+              <h3 data-i18n="price1Title">Electrical</h3>
+              <div class="price">€25 <small data-i18n="priceUnitService">/ service</small></div>
               <ul>
-                <li>Socket installation</li>
-                <li>Breaker mounting</li>
-                <li>Lighting connection</li>
+                <li data-i18n="price1L1">Socket installation</li>
+                <li data-i18n="price1L2">Breaker mounting</li>
+                <li data-i18n="price1L3">Lighting connection</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🪟</div>
-              <h3>Window installation</h3>
-              <div class="price">€60 <small>/ window</small></div>
+              <h3 data-i18n="price2Title">Window installation</h3>
+              <div class="price">€60 <small data-i18n="priceUnitWindow">/ window</small></div>
               <ul>
-                <li>Old window removal</li>
-                <li>New frame installation</li>
-                <li>Sill and seal work</li>
+                <li data-i18n="price2L1">Old window removal</li>
+                <li data-i18n="price2L2">New frame installation</li>
+                <li data-i18n="price2L3">Sill and seal work</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🛠️</div>
-              <h3>Repair</h3>
-              <div class="price">€30 <small>/ service</small></div>
+              <h3 data-i18n="price3Title">Repair</h3>
+              <div class="price">€30 <small data-i18n="priceUnitService2">/ service</small></div>
               <ul>
-                <li>Hardware adjustment</li>
-                <li>Door and frame repair</li>
-                <li>Wood restoration</li>
+                <li data-i18n="price3L1">Hardware adjustment</li>
+                <li data-i18n="price3L2">Door and frame repair</li>
+                <li data-i18n="price3L3">Wood restoration</li>
               </ul>
             </article>
             <article class="price-card">
               <div class="icon">🎨</div>
-              <h3>Painting</h3>
-              <div class="price">€40 <small>/ frame</small></div>
+              <h3 data-i18n="price4Title">Painting</h3>
+              <div class="price">€40 <small data-i18n="priceUnitFrame">/ frame</small></div>
               <ul>
-                <li>Surface prep</li>
-                <li>Priming</li>
-                <li>Two-layer painting</li>
+                <li data-i18n="price4L1">Surface prep</li>
+                <li data-i18n="price4L2">Priming</li>
+                <li data-i18n="price4L3">Two-layer painting</li>
               </ul>
             </article>
           </div>
@@ -533,21 +540,21 @@
       <section id="faq" class="section" style="background: white;">
         <div class="container">
           <div class="section-header">
-            <span>FAQ</span>
-            <h2>Common questions</h2>
+            <span data-i18n="faqTag">FAQ</span>
+            <h2 data-i18n="faqTitle">Common questions</h2>
           </div>
           <div style="max-width: 900px; margin: 0 auto; display: grid; gap: 16px;">
             <div class="feature" style="padding: 22px 24px;">
-              <h3>What guarantee do you provide?</h3>
-              <p>We offer a formal quality guarantee between 12 and 36 months depending on the work.</p>
+              <h3 data-i18n="faqQ1">What guarantee do you provide?</h3>
+              <p data-i18n="faqA1">We offer a formal quality guarantee between 12 and 36 months depending on the work.</p>
             </div>
             <div class="feature" style="padding: 22px 24px;">
-              <h3>Can you do emergency service the same day?</h3>
-              <p>Yes, emergency service is available within 1–2 hours in the city.</p>
+              <h3 data-i18n="faqQ2">Can you do emergency service the same day?</h3>
+              <p data-i18n="faqA2">Yes, emergency service is available within 1–2 hours in the city.</p>
             </div>
             <div class="feature" style="padding: 22px 24px;">
-              <h3>How is payment handled?</h3>
-              <p>Payment is made after the work is completed and inspected with the client.</p>
+              <h3 data-i18n="faqQ3">How is payment handled?</h3>
+              <p data-i18n="faqA3">Payment is made after the work is completed and inspected with the client.</p>
             </div>
           </div>
         </div>
@@ -556,31 +563,31 @@
       <section id="contact" class="section">
         <div class="container">
           <div class="section-header">
-            <span>Contact</span>
-            <h2>Get in touch</h2>
+            <span data-i18n="contactTag">Contact</span>
+            <h2 data-i18n="contactTitle">Get in touch</h2>
           </div>
           <div class="contact-wrap">
             <div class="info-box">
               <div class="info-item">
                 <div class="info-icon">📞</div>
-                <div><strong>Phone</strong><br />+1 (212) 555-0149</div>
+                <div><strong data-i18n="phoneLabel">Phone</strong><br />+1 (212) 555-0149</div>
               </div>
               <div class="info-item">
                 <div class="info-icon">✉️</div>
-                <div><strong>Email</strong><br />hello@newyorkwindowsetup.com</div>
+                <div><strong data-i18n="emailLabel">Email</strong><br />hello@newyorkwindowsetup.com</div>
               </div>
               <div class="info-item">
                 <div class="info-icon">📍</div>
-                <div><strong>Office</strong><br />New York, NY</div>
+                <div><strong data-i18n="addressLabel">Office</strong><br /><span data-i18n="addressText">New York, NY</span></div>
               </div>
             </div>
 
             <div class="contact-form">
               <form>
-                <input type="text" placeholder="Your name" />
-                <input type="tel" placeholder="Phone number" />
-                <textarea rows="5" placeholder="Your message"></textarea>
-                <button class="cta" type="submit">Send message</button>
+                <input type="text" data-i18n-placeholder="namePlaceholder2" placeholder="Your name" />
+                <input type="tel" data-i18n-placeholder="phonePlaceholder2" placeholder="Phone number" />
+                <textarea rows="5" data-i18n-placeholder="messagePlaceholder" placeholder="Your message"></textarea>
+                <button class="cta" type="submit" data-i18n="sendMessage">Send message</button>
               </form>
             </div>
           </div>
@@ -595,47 +602,154 @@
             <div class="brand-mark">🔧</div>
             <span>New York Window Setup</span>
           </div>
-          <p class="footer-tagline">Crafted window, glazing, and home improvement services for modern living.</p>
+          <p class="footer-tagline" data-i18n="footerTagline">Crafted window, glazing, and home improvement services for modern living.</p>
         </div>
 
         <div class="footer-column">
-          <h4>Services</h4>
+          <h4 data-i18n="footerServices">Services</h4>
           <ul class="footer-list">
-            <li><a href="#services">Window installation</a></li>
-            <li><a href="#services">Window repair</a></li>
-            <li><a href="#services">Painting & finishing</a></li>
-            <li><a href="#services">Electrical</a></li>
+            <li><a href="#services" data-i18n="footerService1">Window installation</a></li>
+            <li><a href="#services" data-i18n="footerService2">Window repair</a></li>
+            <li><a href="#services" data-i18n="footerService3">Painting & finishing</a></li>
+            <li><a href="#services" data-i18n="footerService4">Electrical</a></li>
           </ul>
         </div>
 
         <div class="footer-column">
-          <h4>Company</h4>
+          <h4 data-i18n="footerCompany">Company</h4>
           <ul class="footer-list">
-            <li><a href="#about">About us</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="#about" data-i18n="footerAbout">About us</a></li>
+            <li><a href="#pricing" data-i18n="footerPricing">Pricing</a></li>
+            <li><a href="#faq" data-i18n="footerFaq">FAQ</a></li>
+            <li><a href="privacy.html" data-i18n="footerPrivacy">Privacy Policy</a></li>
           </ul>
         </div>
 
         <div class="footer-column">
-          <h4>Contact</h4>
+          <h4 data-i18n="footerContact">Contact</h4>
           <ul class="footer-list">
             <li><span>+1 (212) 555-0149</span></li>
             <li><span>hello@newyorkwindowsetup.com</span></li>
-            <li><span>Mon-Sat • 8:00 AM – 8:00 PM</span></li>
+            <li><span data-i18n="footerHours">Mon-Sat • 8:00 AM – 8:00 PM</span></li>
           </ul>
-          <a class="mini-cta" href="#contact">Request an estimate</a>
+          <a class="mini-cta" href="#contact" data-i18n="footerEstimate">Request an estimate</a>
         </div>
       </div>
 
       <div class="container footer-bottom">
-        <div>© 2026 New York Window Setup</div>
+        <div data-i18n="footerBottom">© 2026 New York Window Setup</div>
         <div class="footer-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="#contact">Contact</a>
+          <a href="privacy.html" data-i18n="footerPrivacyLink">Privacy Policy</a>
+          <a href="#contact" data-i18n="footerContactLink">Contact</a>
         </div>
       </div>
     </footer>
+
+    <script>
+      const translations = {
+        en: {
+          navHome: 'Home', navServices: 'Services', navAbout: 'About', navPricing: 'Pricing', navFaq: 'FAQ', navContact: 'Contact', ctaBook: 'Book a call',
+          eyebrow: 'High quality work & guarantee', heroTitle: 'Glass, doors, and home upgrades done right.', heroText: 'New York Window Setup provides precise installation, repair, glazing, and finishing services for homes and businesses with dependable craftsmanship.', heroCTA1: 'Calculate cost', heroCTA2: 'Our services',
+          quickRequest: 'Quick request', namePlaceholder: 'Your name', phonePlaceholder: 'Phone number', requestCall: 'Request a call',
+          servicesTag: 'Our work', servicesTitle: 'Key services', servicesText: 'We deliver reliable home improvement services with transparent pricing and long-term quality.',
+          service1Title: 'Electrical work', service1Text: 'Wiring, outlets, switches, automation and troubleshooting.', service2Title: 'Window installation', service2Text: 'Professional installation for plastic, aluminum and wooden windows.', service3Title: 'Window repair', service3Text: 'Frame, seal and hardware repair with precise finishing.', service4Title: 'Window painting', service4Text: 'Refresh frames with durable finishes in any desired color.',
+          stat1: 'Years of experience', stat2: 'Jobs completed', stat3: 'Quality guarantee',
+          aboutTag: 'About us', aboutTitle: 'Team of professionals', aboutText: 'Our specialists combine craftsmanship, materials and careful attention to detail.',
+          pricingTag: 'Pricing', pricingTitle: 'Transparent prices', pricingText: 'Estimated pricing for popular home improvement services.',
+          price1Title: 'Electrical', price1L1: 'Socket installation', price1L2: 'Breaker mounting', price1L3: 'Lighting connection', priceUnitService: '/ service',
+          price2Title: 'Window installation', price2L1: 'Old window removal', price2L2: 'New frame installation', price2L3: 'Sill and seal work', priceUnitWindow: '/ window',
+          price3Title: 'Repair', price3L1: 'Hardware adjustment', price3L2: 'Door and frame repair', price3L3: 'Wood restoration', priceUnitService2: '/ service',
+          price4Title: 'Painting', price4L1: 'Surface prep', price4L2: 'Priming', price4L3: 'Two-layer painting', priceUnitFrame: '/ frame',
+          faqTag: 'FAQ', faqTitle: 'Common questions', faqQ1: 'What guarantee do you provide?', faqA1: 'We offer a formal quality guarantee between 12 and 36 months depending on the work.', faqQ2: 'Can you do emergency service the same day?', faqA2: 'Yes, emergency service is available within 1–2 hours in the city.', faqQ3: 'How is payment handled?', faqA3: 'Payment is made after the work is completed and inspected with the client.',
+          contactTag: 'Contact', contactTitle: 'Get in touch', phoneLabel: 'Phone', emailLabel: 'Email', addressLabel: 'Office', addressText: 'New York, NY',
+          namePlaceholder2: 'Your name', phonePlaceholder2: 'Phone number', messagePlaceholder: 'Your message', sendMessage: 'Send message',
+          footerTagline: 'Crafted window, glazing, and home improvement services for modern living.', footerServices: 'Services', footerService1: 'Window installation', footerService2: 'Window repair', footerService3: 'Painting & finishing', footerService4: 'Electrical', footerCompany: 'Company', footerAbout: 'About us', footerPricing: 'Pricing', footerFaq: 'FAQ', footerPrivacy: 'Privacy Policy', footerContact: 'Contact', footerHours: 'Mon-Sat • 8:00 AM – 8:00 PM', footerEstimate: 'Request an estimate', footerBottom: '© 2026 New York Window Setup', footerPrivacyLink: 'Privacy Policy', footerContactLink: 'Contact',
+        },
+        es: {
+          navHome: 'Inicio', navServices: 'Servicios', navAbout: 'Nosotros', navPricing: 'Precios', navFaq: 'FAQ', navContact: 'Contacto', ctaBook: 'Reservar llamada',
+          eyebrow: 'Trabajo de alta calidad y garantía', heroTitle: 'Vidrios, puertas y mejoras para el hogar hechas bien.', heroText: 'New York Window Setup ofrece servicios precisos de instalación, reparación, vidriado y acabado para hogares y negocios con artesanía confiable.', heroCTA1: 'Calcular costo', heroCTA2: 'Nuestros servicios',
+          quickRequest: 'Solicitud rápida', namePlaceholder: 'Tu nombre', phonePlaceholder: 'Número de teléfono', requestCall: 'Solicitar llamada',
+          servicesTag: 'Nuestro trabajo', servicesTitle: 'Servicios clave', servicesText: 'Entregamos servicios confiables de mejora del hogar con precios transparentes y calidad a largo plazo.',
+          service1Title: 'Trabajo eléctrico', service1Text: 'Cableado, tomacorrientes, interruptores, automatización y diagnóstico.', service2Title: 'Instalación de ventanas', service2Text: 'Instalación profesional para ventanas de plástico, aluminio y madera.', service3Title: 'Reparación de ventanas', service3Text: 'Reparación de marcos, sellos y herrajes con acabado preciso.', service4Title: 'Pintura de ventanas', service4Text: 'Renueva marcos con acabados duraderos en el color que desees.',
+          stat1: 'Años de experiencia', stat2: 'Trabajos realizados', stat3: 'Garantía de calidad',
+          aboutTag: 'Sobre nosotros', aboutTitle: 'Equipo de profesionales', aboutText: 'Nuestros especialistas combinan artesanía, materiales y atención cuidadosa al detalle.',
+          pricingTag: 'Precios', pricingTitle: 'Precios transparentes', pricingText: 'Estimación de precios para servicios comunes del hogar.',
+          price1Title: 'Electricidad', price1L1: 'Instalación de enchufes', price1L2: 'Montaje de disyuntores', price1L3: 'Conexión de iluminación', priceUnitService: '/ servicio',
+          price2Title: 'Instalación de ventanas', price2L1: 'Retiro de la ventana antigua', price2L2: 'Instalación del nuevo marco', price2L3: 'Trabajo con alféizar y sellado', priceUnitWindow: '/ ventana',
+          price3Title: 'Reparación', price3L1: 'Ajuste de herrajes', price3L2: 'Reparación de puertas y marcos', price3L3: 'Restauración de madera', priceUnitService2: '/ servicio',
+          price4Title: 'Pintura', price4L1: 'Preparación superficial', price4L2: 'Imprimación', price4L3: 'Pintura en dos capas', priceUnitFrame: '/ marco',
+          faqTag: 'FAQ', faqTitle: 'Preguntas frecuentes', faqQ1: '¿Qué garantía ofrecen?', faqA1: 'Ofrecemos una garantía formal de calidad entre 12 y 36 meses según el trabajo.', faqQ2: '¿Pueden atender emergencias el mismo día?', faqA2: 'Sí, el servicio de emergencia está disponible en 1–2 horas dentro de la ciudad.', faqQ3: '¿Cómo se maneja el pago?', faqA3: 'El pago se realiza después de completar el trabajo y revisarlo con el cliente.',
+          contactTag: 'Contacto', contactTitle: 'Póngase en contacto', phoneLabel: 'Teléfono', emailLabel: 'Correo', addressLabel: 'Oficina', addressText: 'Nueva York, NY',
+          namePlaceholder2: 'Tu nombre', phonePlaceholder2: 'Número de teléfono', messagePlaceholder: 'Tu mensaje', sendMessage: 'Enviar mensaje',
+          footerTagline: 'Servicios de vidrio, acabado y mejora del hogar para una vida moderna.', footerServices: 'Servicios', footerService1: 'Instalación de ventanas', footerService2: 'Reparación de ventanas', footerService3: 'Pintura y acabado', footerService4: 'Electricidad', footerCompany: 'Empresa', footerAbout: 'Nosotros', footerPricing: 'Precios', footerFaq: 'FAQ', footerPrivacy: 'Política de privacidad', footerContact: 'Contacto', footerHours: 'Lun-Sab • 8:00 AM – 8:00 PM', footerEstimate: 'Solicitar presupuesto', footerBottom: '© 2026 New York Window Setup', footerPrivacyLink: 'Política de privacidad', footerContactLink: 'Contacto',
+        },
+        de: {
+          navHome: 'Startseite', navServices: 'Leistungen', navAbout: 'Über uns', navPricing: 'Preise', navFaq: 'FAQ', navContact: 'Kontakt', ctaBook: 'Anruf buchen',
+          eyebrow: 'Hohe Qualität und Garantie', heroTitle: 'Fenster, Türen und Hausmodernisierung richtig gemacht.', heroText: 'New York Window Setup bietet präzise Installations-, Reparatur-, Verglasungs- und Finishingsleistungen für Häuser und Unternehmen mit verlässlicher Handwerkskunst.', heroCTA1: 'Kosten berechnen', heroCTA2: 'Unsere Leistungen',
+          quickRequest: 'Schnellanfrage', namePlaceholder: 'Ihr Name', phonePlaceholder: 'Telefonnummer', requestCall: 'Anruf anfragen',
+          servicesTag: 'Unsere Arbeit', servicesTitle: 'Hauptleistungen', servicesText: 'Wir bieten zuverlässige Hausmodernisierungsleistungen mit transparenten Preisen und Langlebigkeit.',
+          service1Title: 'Elektroarbeiten', service1Text: 'Verdrahtung, Steckdosen, Schalter, Automatik und Diagnostik.', service2Title: 'Fensterinstallation', service2Text: 'Professioneller Einbau von Kunststoff-, Aluminium- und Holzfenstern.', service3Title: 'Fensterreparatur', service3Text: 'Reparatur von Rahmen, Dichtungen und Beschlägen mit präzisem Finish.', service4Title: 'Fensteranstrich', service4Text: 'Modernisierung von Rahmen mit langlebigen Oberflächen in jeder gewünschten Farbe.',
+          stat1: 'Jahre Erfahrung', stat2: 'Abgeschlossene Projekte', stat3: 'Qualitätsgarantie',
+          aboutTag: 'Über uns', aboutTitle: 'Team von Fachleuten', aboutText: 'Unsere Spezialisten verbinden Handwerk, Materialien und sorgfältige Detailarbeit.',
+          pricingTag: 'Preise', pricingTitle: 'Transparente Preise', pricingText: 'Geschätzte Preise für häufige Hausreparaturen.',
+          price1Title: 'Elektrik', price1L1: 'Steckdosenmontage', price1L2: 'Leitungsschutzschalter', price1L3: 'Beleuchtungsanschluss', priceUnitService: '/ Dienstleistung',
+          price2Title: 'Fensterinstallation', price2L1: 'Entfernung des alten Fensters', price2L2: 'Einbau des neuen Rahmens', price2L3: 'Arbeiten an Fensterbrett und Dichtung', priceUnitWindow: '/ Fenster',
+          price3Title: 'Reparatur', price3L1: 'Beschlagjustierung', price3L2: 'Reparatur von Türen und Rahmen', price3L3: 'Holzrestaurierung', priceUnitService2: '/ Dienstleistung',
+          price4Title: 'Anstrich', price4L1: 'Oberflächenvorbereitung', price4L2: 'Grundierung', price4L3: 'Zweischichtige Farbgebung', priceUnitFrame: '/ Rahmen',
+          faqTag: 'FAQ', faqTitle: 'Häufige Fragen', faqQ1: 'Welche Garantie geben Sie?', faqA1: 'Wir bieten eine offizielle Qualitätsgarantie zwischen 12 und 36 Monaten je nach Arbeit.', faqQ2: 'Können Sie Notfälle am selben Tag erledigen?', faqA2: 'Ja, der Notfalldienst ist in der Stadt innerhalb von 1–2 Stunden verfügbar.', faqQ3: 'Wie läuft die Zahlung ab?', faqA3: 'Die Zahlung erfolgt nach Abschluss der Arbeit und der Inspektion mit dem Kunden.',
+          contactTag: 'Kontakt', contactTitle: 'Kontakt aufnehmen', phoneLabel: 'Telefon', emailLabel: 'E-Mail', addressLabel: 'Büro', addressText: 'New York, NY',
+          namePlaceholder2: 'Ihr Name', phonePlaceholder2: 'Telefonnummer', messagePlaceholder: 'Ihre Nachricht', sendMessage: 'Nachricht senden',
+          footerTagline: 'Hochwertige Fenster-, Glas- und Hausmodernisierungsleistungen für modernes Wohnen.', footerServices: 'Leistungen', footerService1: 'Fensterinstallation', footerService2: 'Fensterreparatur', footerService3: 'Malerarbeiten & Finish', footerService4: 'Elektrik', footerCompany: 'Unternehmen', footerAbout: 'Über uns', footerPricing: 'Preise', footerFaq: 'FAQ', footerPrivacy: 'Datenschutz', footerContact: 'Kontakt', footerHours: 'Mo-Sa • 8:00 – 20:00 Uhr', footerEstimate: 'Kostenanfrage', footerBottom: '© 2026 New York Window Setup', footerPrivacyLink: 'Datenschutz', footerContactLink: 'Kontakt',
+        },
+        ru: {
+          navHome: 'Главная', navServices: 'Услуги', navAbout: 'О нас', navPricing: 'Цены', navFaq: 'FAQ', navContact: 'Контакты', ctaBook: 'Заказать звонок',
+          eyebrow: 'Высокое качество и гарантия', heroTitle: 'Окна, двери и улучшения дома — качественно и надежно.', heroText: 'New York Window Setup предлагает точный монтаж, ремонт, остекление и финишную отделку для домов и бизнеса с надежным качеством.', heroCTA1: 'Рассчитать стоимость', heroCTA2: 'Наши услуги',
+          quickRequest: 'Быстрая заявка', namePlaceholder: 'Ваше имя', phonePlaceholder: 'Номер телефона', requestCall: 'Заказать звонок',
+          servicesTag: 'Наши работы', servicesTitle: 'Основные услуги', servicesText: 'Мы предоставляем надежные решения для дома с прозрачными ценами и долговечным качеством.',
+          service1Title: 'Электромонтаж', service1Text: 'Проводка, розетки, выключатели, автоматика и диагностика.', service2Title: 'Монтаж окон', service2Text: 'Профессиональный монтаж пластиковых, алюминиевых и деревянных окон.', service3Title: 'Ремонт окон', service3Text: 'Ремонт рам, уплотнителей и фурнитуры с точной отделкой.', service4Title: 'Покраска окон', service4Text: 'Обновление рам прочными покрытиями в любом нужном цвете.',
+          stat1: 'Лет опыта', stat2: 'Выполненных работ', stat3: 'Гарантия качества',
+          aboutTag: 'О нас', aboutTitle: 'Команда профессионалов', aboutText: 'Наши специалисты сочетают мастерство, материалы и внимательное отношение к деталям.',
+          pricingTag: 'Цены', pricingTitle: 'Прозрачные цены', pricingText: 'Ориентировочные цены на популярные работы по дому.',
+          price1Title: 'Электрика', price1L1: 'Монтаж розетки', price1L2: 'Установка автомата', price1L3: 'Подключение освещения', priceUnitService: '/ услуга',
+          price2Title: 'Монтаж окон', price2L1: 'Удаление старого окна', price2L2: 'Монтаж новой рамы', price2L3: 'Работы с подоконником и уплотнением', priceUnitWindow: '/ окно',
+          price3Title: 'Ремонт', price3L1: 'Регулировка фурнитуры', price3L2: 'Ремонт дверей и рам', price3L3: 'Реставрация дерева', priceUnitService2: '/ услуга',
+          price4Title: 'Покраска', price4L1: 'Подготовка поверхности', price4L2: 'Грунтовка', price4L3: 'Покраска в два слоя', priceUnitFrame: '/ рама',
+          faqTag: 'FAQ', faqTitle: 'Частые вопросы', faqQ1: 'Какую гарантию вы даёте?', faqA1: 'Мы предоставляем официальную гарантию от 12 до 36 месяцев в зависимости от работы.', faqQ2: 'Можете ли вы сделать срочный ремонт в тот же день?', faqA2: 'Да, аварийная служба доступна в городе в течение 1–2 часов.', faqQ3: 'Как проходит оплата?', faqA3: 'Оплата производится после завершения работы и проверки с клиентом.',
+          contactTag: 'Контакты', contactTitle: 'Свяжитесь с нами', phoneLabel: 'Телефон', emailLabel: 'Email', addressLabel: 'Офис', addressText: 'Нью-Йорк, штат Нью-Йорк',
+          namePlaceholder2: 'Ваше имя', phonePlaceholder2: 'Номер телефона', messagePlaceholder: 'Ваше сообщение', sendMessage: 'Отправить сообщение',
+          footerTagline: 'Профессиональные услуги по остеклению и дому для современного образа жизни.', footerServices: 'Услуги', footerService1: 'Монтаж окон', footerService2: 'Ремонт окон', footerService3: 'Покраска и финиш', footerService4: 'Электрика', footerCompany: 'Компания', footerAbout: 'О нас', footerPricing: 'Цены', footerFaq: 'FAQ', footerPrivacy: 'Политика конфиденциальности', footerContact: 'Контакты', footerHours: 'Пн-Сб • 8:00 — 20:00', footerEstimate: 'Запросить смету', footerBottom: '© 2026 New York Window Setup', footerPrivacyLink: 'Политика конфиденциальности', footerContactLink: 'Контакты',
+        }
+      };
+
+      const langButtons = document.querySelectorAll('.lang-btn');
+      const i18nNodes = document.querySelectorAll('[data-i18n]');
+      const placeholderNodes = document.querySelectorAll('[data-i18n-placeholder]');
+
+      function applyLanguage(lang) {
+        const dict = translations[lang] || translations.en;
+        document.documentElement.lang = lang;
+        document.title = 'New York Window Setup';
+
+        i18nNodes.forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (dict[key]) node.textContent = dict[key];
+        });
+
+        placeholderNodes.forEach((node) => {
+          const key = node.getAttribute('data-i18n-placeholder');
+          if (dict[key]) node.setAttribute('placeholder', dict[key]);
+        });
+
+        langButtons.forEach((btn) => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+      }
+
+      langButtons.forEach((btn) => {
+        btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+      });
+
+      applyLanguage('en');
+    </script>
   </body>
 </html>
