@@ -3,22 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Professional home services, window installation and repair by New York Window Setup." />
+    <meta name="description" content="Professional home services, window installation, repair, painting and electrical work by New York Window Setup." />
     <title>New York Window Setup</title>
     <style>
       :root {
         --brand: #2563eb;
-        --brand-dark: #1d4ed8;
-        --brand-soft: #dbeafe;
+        --brand-strong: #1d4ed8;
+        --brand-soft: #e0ecff;
+        --brand-warm: #ffb703;
         --ink: #0f172a;
         --muted: #475569;
-        --bg: #f8fafc;
+        --bg: #f5f7fb;
         --card: #ffffff;
         --line: #e2e8f0;
         --success: #10b981;
-        --footer: #0b1220;
-        --footer-soft: #111c31;
-        --shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+        --dark: #0b1220;
+        --dark-soft: #111c31;
+        --shadow: 0 20px 48px rgba(15, 23, 42, 0.08);
       }
 
       * { box-sizing: border-box; }
@@ -26,70 +27,83 @@
       body {
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
         color: var(--ink);
-        background: var(--bg);
         line-height: 1.6;
       }
       a { color: inherit; text-decoration: none; }
       img { max-width: 100%; display: block; }
-      .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+      button, input, textarea { font: inherit; }
+
+      .container {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
       header {
         position: sticky;
         top: 0;
-        z-index: 20;
-        background: rgba(255,255,255,0.88);
+        z-index: 30;
+        background: rgba(255,255,255,0.8);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--line);
+        border-bottom: 1px solid rgba(148,163,184,0.25);
       }
+
       .nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 72px;
+        min-height: 76px;
         gap: 18px;
       }
+
       .brand {
         display: flex;
         align-items: center;
         gap: 12px;
         font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1.08rem;
       }
+
       .brand-mark {
         width: 42px;
         height: 42px;
-        border-radius: 12px;
+        border-radius: 14px;
         display: grid;
         place-items: center;
         color: white;
         font-size: 1.1rem;
         background: linear-gradient(135deg, var(--brand), #4f46e5);
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
       }
+
       nav {
         display: flex;
-        gap: 20px;
+        align-items: center;
+        gap: 22px;
         color: var(--muted);
-        font-weight: 600;
-        font-size: 0.95rem;
+        font-weight: 700;
+        font-size: 0.93rem;
       }
       nav a:hover { color: var(--brand); }
+
       .lang-switch {
         display: flex;
         align-items: center;
         gap: 6px;
-        background: #f1f5f9;
+        padding: 5px;
         border: 1px solid var(--line);
         border-radius: 999px;
-        padding: 4px;
+        background: #f1f5f9;
       }
+
       .lang-btn {
         border: none;
         background: transparent;
         color: var(--muted);
-        padding: 8px 12px;
-        border-radius: 999px;
         font-weight: 700;
+        border-radius: 999px;
+        padding: 8px 12px;
         cursor: pointer;
       }
       .lang-btn.active {
@@ -97,135 +111,168 @@
         color: var(--brand);
         box-shadow: 0 2px 10px rgba(37,99,235,0.08);
       }
+
       .cta {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding: 14px 24px;
         border-radius: 12px;
-        background: var(--brand);
+        background: linear-gradient(135deg, var(--brand), var(--brand-strong));
         color: white;
-        font-weight: 700;
-        border: none;
-        cursor: pointer;
-        transition: background 0.2s ease, transform 0.2s ease;
+        font-weight: 800;
+        box-shadow: 0 10px 24px rgba(37, 99, 235, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
       .cta:hover {
-        background: var(--brand-dark);
         transform: translateY(-1px);
+        box-shadow: 0 14px 26px rgba(37, 99, 235, 0.24);
       }
+
       .hero {
-        background: linear-gradient(135deg, #0f172a, #111827 35%, #1e3a8a);
+        background: radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 30%),
+                    linear-gradient(135deg, #0f172a, #111827 35%, #1e3a8a);
         color: white;
-        padding: 90px 0 70px;
+        padding: 84px 0 74px;
       }
+
       .hero-grid {
         display: grid;
-        grid-template-columns: 1.3fr 0.9fr;
-        gap: 48px;
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 52px;
         align-items: center;
       }
+
       .eyebrow {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: rgba(37, 99, 235, 0.15);
-        border: 1px solid rgba(96,165,250,0.3);
+        background: rgba(37,99,235,0.14);
+        border: 1px solid rgba(147,197,253,0.22);
         color: #dbeafe;
         border-radius: 999px;
         padding: 7px 14px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
+
       h1 {
-        font-size: clamp(2.5rem, 5vw, 4.5rem);
-        line-height: 1.05;
         margin: 20px 0 18px;
+        font-size: clamp(2.7rem, 5vw, 4.8rem);
+        line-height: 1.05;
+        letter-spacing: -0.06em;
       }
+
       .lead {
+        max-width: 630px;
         color: #dbeafe;
-        font-size: 1.1rem;
-        max-width: 620px;
+        font-size: 1.08rem;
       }
+
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 16px;
         margin-top: 28px;
       }
+
       .btn-light {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding: 14px 20px;
         border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.2);
         background: rgba(255,255,255,0.08);
         color: white;
         font-weight: 700;
       }
+
       .card-form {
         background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 26px;
         padding: 28px;
-        border-radius: 24px;
-        backdrop-filter: blur(6px);
         box-shadow: var(--shadow);
+        backdrop-filter: blur(6px);
       }
-      .card-form h3 { margin: 0 0 18px; font-size: 1.8rem; }
+      .card-form h3 {
+        margin: 0 0 18px;
+        font-size: clamp(1.6rem, 2vw, 2.1rem);
+      }
       .field {
-        display: block;
         width: 100%;
-        padding: 14px 16px;
+        display: block;
+        background: rgba(15,23,42,0.38);
+        border: 1px solid rgba(148,163,184,0.45);
         border-radius: 12px;
-        border: 1px solid rgba(148,163,184,0.4);
-        background: rgba(15, 23, 42, 0.38);
         color: white;
+        min-height: 52px;
+        padding: 14px 16px;
         margin: 10px 0 14px;
-        font-size: 1rem;
       }
-      .field::placeholder { color: #cbd5e1; }
-      .section { padding: 90px 0; }
+      .field::placeholder { color: #dbeafe; }
+
+      .section {
+        padding: 94px 0;
+      }
       .section-header {
         text-align: center;
-        max-width: 700px;
+        max-width: 720px;
         margin: 0 auto 42px;
       }
       .section-header span {
         color: var(--brand);
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
         font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       .section-header h2 {
-        font-size: clamp(2rem, 3vw, 3rem);
         margin: 12px 0 10px;
+        font-size: clamp(2rem, 3vw, 3.1rem);
+        letter-spacing: -0.04em;
       }
-      .section-header p { color: var(--muted); font-size: 1.05rem; }
+      .section-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
       .grid-4 {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 22px;
+        gap: 24px;
       }
       .feature {
         background: white;
         border: 1px solid var(--line);
         border-radius: 22px;
-        padding: 28px 20px;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+        padding: 28px 22px;
+        box-shadow: 0 12px 26px rgba(15,23,42,0.04);
       }
-      .icon {
-        width: 56px;
-        height: 56px;
+      .feature .icon {
+        width: 58px;
+        height: 58px;
         display: grid;
         place-items: center;
+        border-radius: 16px;
         background: var(--brand-soft);
         color: var(--brand);
-        border-radius: 16px;
-        font-size: 1.3rem;
+        font-size: 1.45rem;
         margin-bottom: 18px;
       }
-      .feature h3 { margin: 0 0 10px; font-size: 1.25rem; }
-      .feature p { margin: 0; color: var(--muted); }
+      .feature h3 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+      }
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+      }
+
       .stats {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -233,95 +280,137 @@
         margin-top: 30px;
       }
       .stat {
-        background: #f8fafc;
+        background: white;
         border: 1px solid var(--line);
         border-radius: 18px;
-        padding: 24px 18px;
         text-align: center;
+        padding: 24px 18px;
+        box-shadow: 0 8px 20px rgba(15,23,42,0.03);
       }
       .stat strong {
         display: block;
-        font-size: 2.2rem;
         color: var(--brand);
+        font-size: clamp(1.8rem, 3vw, 2.5rem);
       }
+      .stat span {
+        color: var(--muted);
+        display: inline-block;
+        margin-top: 6px;
+      }
+
       .pricing {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 22px;
+        gap: 24px;
       }
       .price-card {
         background: white;
         border: 1px solid var(--line);
         border-radius: 24px;
-        padding: 24px 20px;
+        padding: 24px 22px;
+        box-shadow: 0 12px 24px rgba(15,23,42,0.04);
       }
-      .price-card h3 { margin-top: 12px; }
+      .price-card .icon {
+        width: 56px;
+        height: 56px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--brand-soft);
+        color: var(--brand);
+        font-size: 1.4rem;
+      }
+      .price-card h3 {
+        margin: 18px 0 0;
+      }
       .price {
-        font-size: 2.3rem;
         font-weight: 800;
-        margin: 16px 0;
+        font-size: 2.2rem;
+        margin: 18px 0 12px;
+        letter-spacing: -0.04em;
       }
-      .price small { font-size: 0.9rem; color: var(--muted); }
-      ul { list-style: none; padding: 0; margin: 0; }
-      li { margin: 10px 0; color: var(--muted); }
-      li::before {
+      .price small { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+      .price-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .price-card li {
+        margin: 10px 0;
+        color: var(--muted);
+      }
+      .price-card li::before {
         content: "✓";
         color: var(--success);
-        font-weight: 700;
+        font-weight: 800;
         margin-right: 8px;
       }
+
+      .faq-stack {
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        gap: 18px;
+      }
+
       .contact-wrap {
         display: grid;
-        grid-template-columns: 1fr 1.2fr;
+        grid-template-columns: 0.9fr 1.1fr;
         gap: 28px;
       }
-      .info-box, .contact-form {
+      .info-box,
+      .contact-form {
         background: white;
         border: 1px solid var(--line);
         border-radius: 24px;
-        padding: 28px;
-        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.03);
+        padding: 30px;
+        box-shadow: 0 12px 28px rgba(15,23,42,0.03);
       }
       .info-item {
         display: flex;
         gap: 16px;
         align-items: flex-start;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
       }
       .info-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
+        width: 46px;
+        height: 46px;
         display: grid;
         place-items: center;
+        border-radius: 12px;
         background: var(--brand-soft);
         color: var(--brand);
       }
-      .contact-form form { display: grid; gap: 14px; }
-      .contact-form input, .contact-form textarea {
+      .contact-form form {
+        display: grid;
+        gap: 14px;
+      }
+      .contact-form input,
+      .contact-form textarea {
         width: 100%;
-        padding: 14px 16px;
         border: 1px solid var(--line);
         border-radius: 12px;
-        font: inherit;
+        padding: 14px 16px;
+        background: #f8fafc;
       }
+      .contact-form textarea { min-height: 120px; resize: vertical; }
+
       .site-footer {
-        background: linear-gradient(180deg, var(--footer-soft), var(--footer));
+        background: linear-gradient(180deg, var(--dark-soft), var(--dark));
         color: #dfe7f5;
         padding: 72px 0 28px;
       }
       .footer-grid {
         display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+        grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
         gap: 28px;
-        align-items: start;
       }
       .footer-brand {
         display: flex;
         align-items: center;
         gap: 12px;
+        font-size: 1.12rem;
         font-weight: 800;
-        font-size: 1.15rem;
         color: white;
       }
       .footer-brand .brand-mark {
@@ -329,11 +418,15 @@
         height: 46px;
         border-radius: 14px;
       }
-      .footer-tagline { color: #cbd5e1; max-width: 320px; margin-top: 18px; }
+      .footer-tagline {
+        color: #cbd5e1;
+        max-width: 320px;
+        margin-top: 20px;
+      }
       .footer-column h4 {
         margin: 0 0 16px;
         color: white;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
@@ -345,24 +438,23 @@
         gap: 10px;
       }
       .footer-list li { margin: 0; }
-      .footer-list a, .footer-list span { color: #cbd5e1; }
+      .footer-list a,
+      .footer-list span { color: #cbd5e1; }
       .footer-list a:hover { color: white; }
       .mini-cta {
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 14px;
+        margin-top: 16px;
         padding: 12px 16px;
         border-radius: 12px;
-        background: rgba(37, 99, 235, 0.16);
-        border: 1px solid rgba(147, 197, 253, 0.2);
+        background: rgba(37,99,235,0.16);
+        border: 1px solid rgba(147,197,253,0.2);
         color: white;
         font-weight: 700;
       }
       .footer-bottom {
-        border-top: 1px solid rgba(148, 163, 184, 0.18);
-        margin-top: 26px;
-        padding-top: 20px;
+        margin-top: 28px;
+        border-top: 1px solid rgba(148,163,184,0.18);
+        padding-top: 18px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -371,13 +463,18 @@
       }
       .footer-links {
         display: flex;
-        align-items: center;
-        gap: 22px;
-        color: #dbeafe;
+        gap: 20px;
         flex-wrap: wrap;
       }
-      @media (max-width: 920px) {
-        .hero-grid, .grid-4, .pricing, .contact-wrap, .footer-grid { grid-template-columns: 1fr; }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .grid-4,
+        .pricing,
+        .contact-wrap,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
         nav { display: none; }
         .stats { grid-template-columns: 1fr; }
       }
@@ -417,9 +514,7 @@
           <div>
             <div class="eyebrow" data-i18n="eyebrow">High quality work & guarantee</div>
             <h1 data-i18n="heroTitle">Glass, doors, and home upgrades done right.</h1>
-            <p class="lead" data-i18n="heroText">
-              New York Window Setup provides precise installation, repair, glazing, and finishing services for homes and businesses with dependable craftsmanship.
-            </p>
+            <p class="lead" data-i18n="heroText">New York Window Setup provides precise installation, repair, glazing, and finishing services for homes and businesses with dependable craftsmanship.</p>
             <div class="hero-actions">
               <a class="cta" href="#pricing" data-i18n="heroCTA1">Calculate cost</a>
               <a class="btn-light" href="#services" data-i18n="heroCTA2">Our services</a>
@@ -431,7 +526,7 @@
             <form>
               <input class="field" type="text" data-i18n-placeholder="namePlaceholder" placeholder="Your name" />
               <input class="field" type="tel" data-i18n-placeholder="phonePlaceholder" placeholder="Phone number" />
-              <button class="cta" type="submit" style="width:100%;" data-i18n="requestCall">Request a call</button>
+              <button class="cta" type="submit" style="width: 100%;" data-i18n="requestCall">Request a call</button>
             </form>
           </div>
         </div>
@@ -444,6 +539,7 @@
             <h2 data-i18n="servicesTitle">Key services</h2>
             <p data-i18n="servicesText">We deliver reliable home improvement services with transparent pricing and long-term quality.</p>
           </div>
+
           <div class="grid-4">
             <article class="feature">
               <div class="icon">⚡</div>
@@ -492,6 +588,7 @@
             <h2 data-i18n="pricingTitle">Transparent prices</h2>
             <p data-i18n="pricingText">Estimated pricing for popular home improvement services.</p>
           </div>
+
           <div class="pricing">
             <article class="price-card">
               <div class="icon">⚡</div>
@@ -543,7 +640,7 @@
             <span data-i18n="faqTag">FAQ</span>
             <h2 data-i18n="faqTitle">Common questions</h2>
           </div>
-          <div style="max-width: 900px; margin: 0 auto; display: grid; gap: 16px;">
+          <div class="faq-stack">
             <div class="feature" style="padding: 22px 24px;">
               <h3 data-i18n="faqQ1">What guarantee do you provide?</h3>
               <p data-i18n="faqA1">We offer a formal quality guarantee between 12 and 36 months depending on the work.</p>
@@ -566,6 +663,7 @@
             <span data-i18n="contactTag">Contact</span>
             <h2 data-i18n="contactTitle">Get in touch</h2>
           </div>
+
           <div class="contact-wrap">
             <div class="info-box">
               <div class="info-item">
@@ -586,7 +684,7 @@
               <form>
                 <input type="text" data-i18n-placeholder="namePlaceholder2" placeholder="Your name" />
                 <input type="tel" data-i18n-placeholder="phonePlaceholder2" placeholder="Phone number" />
-                <textarea rows="5" data-i18n-placeholder="messagePlaceholder" placeholder="Your message"></textarea>
+                <textarea data-i18n-placeholder="messagePlaceholder" placeholder="Your message"></textarea>
                 <button class="cta" type="submit" data-i18n="sendMessage">Send message</button>
               </form>
             </div>
